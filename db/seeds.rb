@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# users
+10.times do |n|
+    User.create(name: "sample#{n}", email: "sample#{n}@gmail.com", password: "tintin#{n}")
+end
+
+# tournaments
+10.times do |n|
+    Tournament.create(name: "t#{n}", date: Time.parse('2020-01-01 12:00:00'))
+    Tournament.create(name: "t#{n}", date: Time.parse('2020-01-01 12:00:00'))
+end
