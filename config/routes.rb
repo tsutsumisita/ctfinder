@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   # root path
   root 'static_pages#home'
   
-  resources :users, only: [:show]
+  resources :users, only: [:show, :create]
   
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
+  
   
 end
