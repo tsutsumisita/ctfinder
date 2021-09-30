@@ -1,2 +1,85 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TEST</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="./test.css">
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"
+  integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg=="
+  crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@next/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+
+
+<!--写真-->
+<p class="trim-image-to-circle"></p>
+
+<!--名前-->
+<p>Name</p>
+
+<!--自己紹介-->
+<p>profileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofile</p>
+
+<!--レーダーグラフ-->
+<div style="width:400px">
+  <canvas id="mychart"></canvas>
+</div>
+<script>
+var ctx = document.getElementById('mychart');
+var myChart = new Chart(ctx, {
+  type: 'radar',
+  data: {
+    labels: ['Pwn', 'Reversing', 'Crypto', 'Web', 'Network', 'Forensics'],
+    datasets: [{
+      label: 'Product',
+      data: [30, 5, 5, 5, 5, 5],
+      // データライン
+      borderColor: 'rgba(255,30,30,1)',
+      pointBackgroundColor: 'rgba(255,30,30,1)',
+      borderWidth: 2,
+      backgroundColor: 'rgba(139,0,0,0.3)',
+    }],
+  },
+  options: {
+    scales: {
+      r: {
+        // 最小値・最大値
+        min: 0,
+        max: 10,
+        // 背景色
+        backgroundColor: 'white',
+        // グリッドライン
+        grid: {
+          color: 'silver',
+        },
+        // アングルライン
+        angleLines: {
+          color: 'silver',
+        },
+        // ポイントラベル
+        pointLabels: {
+          fontSize: 30,
+          color: 'black',
+          backdropColor: 'white',
+          backdropPadding: 10,
+          padding: 20,
+        },
+      },
+    },
+  },
+});
+</script>
+</div>
+
+<!--ボタン-->
+<a class="button" href="">Like!</a>
+
+</body>
+</html>
