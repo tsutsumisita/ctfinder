@@ -8,11 +8,16 @@
 
 # users
 10.times do |n|
-    User.create(name: "sample#{n}", email: "sample#{n}@gmail.com", password: "tintin#{n}")
+    User.create!(name: "sample#{n}", email: "sample#{n}@gmail.com", password: "tintin#{n}")
 end
 
 # tournaments
 10.times do |n|
-    Tournament.create(name: "t#{n}", date: Time.parse('2020-01-01 12:00:00'))
-    Tournament.create(name: "t#{n}", date: Time.parse('2020-01-01 12:00:00'))
+    Tournament.create!(name: "t#{n}", date: Time.parse('2020-01-01 12:00:00'))
+    Tournament.create!(name: "t#{n}", date: Time.parse('2020-01-01 12:00:00'))
+end
+
+# participants
+10.times do |n|
+    Participant.create!(user_id: n/2+2, tournament_id: n/3+1)
 end
