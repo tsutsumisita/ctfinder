@@ -8,9 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    if @user.nil?
-      @user = User.find(params[:id])
-    end
+    @user = User.find(params[:id]) unless @user.nil?
   end
 
   def create
@@ -24,9 +22,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = current_user
-    if !user.nil?
-      user.destroy
-    end
+    user.destroy unless !user.nil?
     redirect_to root_url
   end
 
