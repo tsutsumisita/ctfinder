@@ -1,11 +1,7 @@
-body {
+.users-body {
     width: 500px;
     margin: 0 auto;
-  }
-
-
-
-
+}
 .trim-image-to-circle {
     background-image: url("./koji.jpg");  /* 表示する画像 */
     width:  400px;       /* ※縦横を同値に */
