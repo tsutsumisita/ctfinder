@@ -59,3 +59,24 @@ end
         liked_id: liked.id
     )
 end
+
+# matching
+10.times do |n|
+    user1 = User.all.sample(1)[0]
+    user2 = User.all.sample(1)[0]
+    while user1.id == user2.id do
+        user2 = User.all.sample(1)[0]
+    end
+    Matching.create!(
+        user1_id: user1.id,
+        user2_id: user2.id
+    )
+end
+
+# direct_message
+10.times do |n|
+    DirectMessage.create!(
+        matching_id: Matching.all.sample(1)[0].id,
+        content: SecureRandom.alphanumeric(rand(1..140))
+    )
+end

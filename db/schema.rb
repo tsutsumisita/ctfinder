@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_121823) do
+ActiveRecord::Schema.define(version: 2021_10_02_150727) do
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.integer "matching_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["matching_id"], name: "index_direct_messages_on_matching_id"
+  end
 
   create_table "likes", force: :cascade do |t|
     t.integer "liker_id", null: false
@@ -19,6 +27,15 @@ ActiveRecord::Schema.define(version: 2021_10_02_121823) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["liked_id"], name: "index_likes_on_liked_id"
     t.index ["liker_id"], name: "index_likes_on_liker_id"
+  end
+
+  create_table "matchings", force: :cascade do |t|
+    t.integer "user1_id", null: false
+    t.integer "user2_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user1_id"], name: "index_matchings_on_user1_id"
+    t.index ["user2_id"], name: "index_matchings_on_user2_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -60,8 +77,11 @@ ActiveRecord::Schema.define(version: 2021_10_02_121823) do
     t.string "remember_digest"
   end
 
+  add_foreign_key "direct_messages", "matchings"
   add_foreign_key "likes", "users", column: "liked_id"
   add_foreign_key "likes", "users", column: "liker_id"
+  add_foreign_key "matchings", "users", column: "user1_id"
+  add_foreign_key "matchings", "users", column: "user2_id"
   add_foreign_key "participants", "tournaments"
   add_foreign_key "participants", "users"
   add_foreign_key "posts", "participants"

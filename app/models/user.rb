@@ -14,6 +14,10 @@ class User < ApplicationRecord
     include ActiveModel::Validations
     
     has_many :participants, dependent: :destroy
+    has_many :liker_relation, class_name: "Like", foreign_key: "liker_id", dependent: :destroy
+    has_many :liked_relation, class_name: "Like", foreign_key: "liked_id", dependent: :destroy
+    has_many :user1_matching, class_name: "Matching", foreign_key: "user1_id", dependent: :destroy
+    has_many :user2_matching, class_name: "Matching", foreign_key: "user2_id", dependent: :destroy
     
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     
