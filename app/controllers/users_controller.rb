@@ -15,8 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @user = User.find(params[:id]) unless @user.nil?
+    @user = User.find(params[:id])
   end
 
   def create
@@ -37,7 +36,7 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :web, :crypt, :reversing, :pwn, :misc, :self_introduction)
   end
 
 end

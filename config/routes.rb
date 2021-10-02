@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   
   resources :users, only: [:show, :create]
-  resources :tournaments, only: [:show]
+  resources :tournaments, only: [:index, :show]
   
-  get    '/login',   to: 'sessions#new'
+  get   '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
+
+  post    '/users/:liked_id/like',  to: 'likes#create', id: /\d+/ 
 
 end

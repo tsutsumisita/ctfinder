@@ -5,7 +5,7 @@ class UserSkillValidator < ActiveModel::Validator
         
     def validate(record)
         unless subv(record.web) && subv(record.crypt) && subv(record.reversing) && subv(record.pwn) && subv(record.misc)
-            record.errors[:web] << "skill error."
+            record.errors[:skill] << "skill error."
         end
     end
 end
