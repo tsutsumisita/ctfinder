@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
   
+  # get '/users/index'
+  def index
+  end
+
+  # post '/users/search'
+  def search
+  end
+
   def new
   end
 

@@ -8,7 +8,17 @@
 
 # users
 10.times do |n|
-    User.create!(name: "sample#{n}", email: "sample#{n}@gmail.com", password: "tintin#{n}")
+    User.create!(
+        name: "sample#{n}", 
+        email: "sample#{n}@gmail.com", 
+        password: "tintin#{n}", 
+        web: [5, [("#{n}".to_i)/2, 1].max].min,
+        crypt: [5, [("#{n}".to_i)/2, 1].max].min,
+        reversing: [5, [("#{n}".to_i)/2, 1].max].min,
+        pwn: [5, [("#{n}".to_i)/2, 1].max].min,
+        misc: [5, [("#{n}".to_i)/2, 1].max].min,
+        self_introduction: "俺がナンバーワンだ！"
+    )
 end
 
 # tournaments
@@ -19,5 +29,5 @@ end
 
 # participants
 10.times do |n|
-    Participant.create!(user_id: n/2+2, tournament_id: n/3+1)
+    Participant.create!(user_id: User.all[n].id, tournament_id: Tournament.all[n].id)
 end
