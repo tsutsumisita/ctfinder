@@ -18,7 +18,7 @@ require 'securerandom'
         crypt: [5, [n/2, 1].max].min,
         reversing: [5, [n/2, 1].max].min,
         pwn: [5, [n/2, 1].max].min,
-        misc: [5, [n/2, 1].max].min,
+        misc: [5, [10, 1].max].min,
         self_introduction: "俺がナンバーワンだ！"
     )
 end

@@ -2,10 +2,9 @@ class UserSkillValidator < ActiveModel::Validator
     def subv(col)
         col.present? && nil != (col.to_s =~ /^[0-9]+$/) && col.to_i >= 1 && col.to_i <= 5
     end
-        
     def validate(record)
-        unless subv(record.web) && subv(record.crypt) && subv(record.reversing) && subv(record.pwn) && subv(record.misc)
-            record.errors[:skill] << "skill error."
+        if options[:fields].any?{|field| !subv(record.send(field)) }
+            record.errors[:skill] << "skill validation error."
         end
     end
 end
@@ -28,7 +27,7 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, presence:true, length: { minimum: 4 }
         # for skill
-    validates_with UserSkillValidator
+    validates_with UserSkillValidator, fields: [:web, :crypt, :reversing, :pwn, :misc]
 
     validates :self_introduction, presence: true, length: { maximum: 200 }
 
