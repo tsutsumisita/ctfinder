@@ -1,5 +1,7 @@
+<%#
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
+%>
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +10,7 @@
 <title>TEST</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="./test.css">
+<%= stylesheet_link_tag "userpage", :media => "all" %>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"
   integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg=="
@@ -17,71 +20,91 @@
 </head>
 <body>
 
-<div class="users-body">
+<div class="container">
+  <div class="row">
+    <div class="col-xl-5" style="background-color:white;">
+      <div>
+        <div class="text-center">
 
-  <!--写真-->
-  <p class="trim-image-to-circle"></p>
+          <!--写真-->
+          <p class="trim-image-to-circle"><img class="d-block mx-auto" src="/assets/koji.png" alt=""></p>
+        </div>
 
-  <!--名前-->
-  <p>Name</p>
+          <!--名前-->
+          <p class="text-center"><font size="7">Name</font></p>
 
-  <!--自己紹介-->
-  <p>profileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofileprofile</p>
+          <!--自己紹介-->
+          <div >
+          <p class="text-break">こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！</p>
+          </div>
+      </div>
+      
+    </div>
 
-  <!--レーダーグラフ-->
+    <div class="col-xl-7" style="background-color:white;">
+      <div class="mx-auto" style="width:auto;">
+        <!--レーダーグラフ-->
 
-  <div style="width:400px">
-    <canvas id="mychart"></canvas>
+        <div style="width:auto">
+          <canvas id="mychart"></canvas>
+        </div>
+        <script>
+        var ctx = document.getElementById('mychart');
+        var myChart = new Chart(ctx, {
+          type: 'radar',
+          data: {
+            labels: ['Pwn', 'Reversing', 'Crypto', 'Web', 'Misc'],
+            datasets: [{
+              label: false,
+              data: [ 5, 5, 5, 5, 5],
+              // データライン
+              borderColor: 'rgba(255,30,30,1)',
+              pointBackgroundColor: 'rgba(255,30,30,1)',
+              borderWidth: 2,
+              backgroundColor: 'rgba(139,0,0,0.3)',
+            }],
+          },
+          options: {
+            title: {display:false},
+            scales: {
+              r: {
+                // 最小値・最大値
+                min: 0,
+                max: 5,
+                // 背景色
+                backgroundColor: 'white',
+                // グリッドライン
+                grid: {
+                  color: 'silver',
+                },
+                // アングルライン
+                angleLines: {
+                  color: 'silver',
+                },
+                // ポイントラベル
+                pointLabels: {
+                  fontSize: 30,
+                  color: 'black',
+                  backdropColor: 'white',
+                  backdropPadding: 0,
+                  padding: 0,
+                },
+              },
+            },
+          },
+        });s
+        </script>
+      </div>
+    </div>
   </div>
-  <script>
-  var ctx = document.getElementById('mychart');
-  var myChart = new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: ['Pwn', 'Reversing', 'Crypto', 'Web', 'Network', 'Forensics'],
-      datasets: [{
-        label: 'Product',
-        data: [30, 5, 5, 5, 5, 5],
-        // データライン
-        borderColor: 'rgba(255,30,30,1)',
-        pointBackgroundColor: 'rgba(255,30,30,1)',
-        borderWidth: 2,
-        backgroundColor: 'rgba(139,0,0,0.3)',
-      }],
-    },
-    options: {
-      scales: {
-        r: {
-          // 最小値・最大値
-          min: 0,
-          max: 10,
-          // 背景色
-          backgroundColor: 'white',
-          // グリッドライン
-          grid: {
-            color: 'silver',
-          },
-          // アングルライン
-          angleLines: {
-            color: 'silver',
-          },
-          // ポイントラベル
-          pointLabels: {
-            fontSize: 30,
-            color: 'black',
-            backdropColor: 'white',
-            backdropPadding: 10,
-            padding: 20,
-          },
-        },
-      },
-    },
-  });s
-  </script>
-  </div>
-
-  <!--ボタン-->
-  <a class="button" href="">Like!</a>
+</div>
+<div class="container" class="bg-info d-flex align-items-center justify-content-center" style="background-color:white;">
+      <!--ボタン-->
+      <div class="mx-auto" style="width: 400px;">
+      <a class="button-like" class="container" href="">Like!</a>
+      </div>
+</div>
+  
 
 </div>
 
