@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_060647) do
+ActiveRecord::Schema.define(version: 2021_10_02_104516) do
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "liker_id", null: false
+    t.integer "liked_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["liked_id"], name: "index_likes_on_liked_id"
+    t.index ["liker_id"], name: "index_likes_on_liker_id"
+  end
 
   create_table "participants", force: :cascade do |t|
     t.integer "user_id"
@@ -19,6 +28,14 @@ ActiveRecord::Schema.define(version: 2021_10_02_060647) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tournament_id"], name: "index_participants_on_tournament_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "content"
+    t.integer "participant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["participant_id"], name: "index_posts_on_participant_id"
   end
 
   create_table "tournaments", force: :cascade do |t|
@@ -42,6 +59,9 @@ ActiveRecord::Schema.define(version: 2021_10_02_060647) do
     t.text "self_introduction"
   end
 
+  add_foreign_key "likes", "users", column: "liked_id"
+  add_foreign_key "likes", "users", column: "liker_id"
   add_foreign_key "participants", "tournaments"
   add_foreign_key "participants", "users"
+  add_foreign_key "posts", "participants"
 end
