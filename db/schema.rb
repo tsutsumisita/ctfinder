@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_30_123155) do
+ActiveRecord::Schema.define(version: 2021_10_02_060647) do
 
   create_table "participants", force: :cascade do |t|
     t.integer "user_id"
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 2021_09_30_123155) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "web"
+    t.integer "crypt"
+    t.integer "reversing"
+    t.integer "pwn"
+    t.integer "misc"
+    t.text "self_introduction"
   end
 
   add_foreign_key "participants", "tournaments"
