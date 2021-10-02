@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_104516) do
+ActiveRecord::Schema.define(version: 2021_10_02_121823) do
 
   create_table "likes", force: :cascade do |t|
     t.integer "liker_id", null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_104516) do
     t.integer "pwn"
     t.integer "misc"
     t.text "self_introduction"
+    t.string "remember_digest"
   end
 
   add_foreign_key "likes", "users", column: "liked_id"
