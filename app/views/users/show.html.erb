@@ -101,12 +101,12 @@
 <div class="container" class="bg-info d-flex align-items-center justify-content-center" style="background-color:white;">
       <!--ボタン-->
       <div class="mx-auto" style="width: 400px;">
-      <a class="button-like" class="container" href="">Like!</a>
+      <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, class:"button-like"} %>
       </div>
 </div>
   
 
 </div>
 
-</body>
+
 </html>
