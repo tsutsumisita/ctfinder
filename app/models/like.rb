@@ -1,7 +1,7 @@
 class LikeIdValidator < ActiveModel::Validator
     def validate(r)
-        unless r.liker_id.present? && r.liked_id.present? && r.liker_id != r.liked_id
-            r.errors[:like_id] << "cannot like myself."
+        unless r.liker.present? && r.liked.present? && r.liker != r.liked
+            r.errors[:like] << "cannot like myself."
         end
     end
 end
