@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   get   '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
 
-  post    '/users/:liked_id/like',  to: 'likes#create', id: /\d+/ 
+  post    '/users/:liked_id/like',  to: 'likes#create', liked_id: /\d+/
 
 end
