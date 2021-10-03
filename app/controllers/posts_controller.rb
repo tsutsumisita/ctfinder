@@ -4,7 +4,14 @@ class PostsController < ApplicationController
 
     def create
         @tournament = Tournament.find(params[:id])
-        # @participant = 
+        @participant = @tournament.participants.find(user: current_user)
+        @post = @participant.posts.build(post_params)
+        if @post.save
+            flash.now[:success] = "投稿しました"
+            redirect_to tournament_path
+        elsif
+            flash[:danger] = "投稿に失敗しました"
+        end
     end
 
     def logged_in_user
