@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root path
   root 'static_pages#home'
   
-  resources :users, only: [:show, :create]
+  resources :users, only: [:show, :create, :new]
   resources :tournaments, only: [:index, :show]
   
   get   '/login',   to: 'sessions#new'
