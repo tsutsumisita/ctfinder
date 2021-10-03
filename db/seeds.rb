@@ -33,8 +33,10 @@ end
 
 # participants
 10.times do |n|
+    user = User.all.sample(1)[0]
     Participant.create!(
-        user: User.all.sample(1)[0], 
+        user: user,
+        name: user.name,
         tournament: Tournament.all.sample(1)[0]
     )
 end
