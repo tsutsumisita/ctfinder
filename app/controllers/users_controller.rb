@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   # get '/users/index'
   def index
-    @user = User.all
+    @users = User.all
   end
 
   # post '/users/search'
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def create
