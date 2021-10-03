@@ -1,2 +1,93 @@
-<h1>Tournaments#show</h1>
-<p>Find me in app/views/tournaments/show.html.erb</p>
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+ <style>
+    .horizontal-list {
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    h1{
+    margin: 1.5em;
+}
+    .example2 {
+    overflow-y: auto;
+    height: 300pt; 
+    }
+    .example3 {
+        margin: 2em;
+    }
+    .example4 {
+        overflow-y: auto;
+    height: 600pt; 
+    }
+    img {
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width:  100%;       /* ※縦横を同値に */
+    height: 100%;       /* ※縦横を同値に */}
+    .item {
+      /* 横スクロール用 */
+      display: inline-block;
+      width: 10%;
+
+      /* 見た目調整 */
+      margin: 16px;
+      font-size: 1em;
+      background: rgba(255, 0, 0, 0.4);
+    }
+
+  </style>
+ <meta charset="utf-8">
+ </head>
+ <body>
+ <h1><%=@tournament.name  %></h1>
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col-4">
+ <div class="container-fluid example2">
+ <h6 class="border-bottom border-gray pb-2 mb-0">members</h6>
+  <div class="row">
+  <% for num in 1..20 do %>
+    <div class="col-4">
+    <div class="card">
+    <p>Card title</p>
+    <img src="https://placehold.jp/150x150.png" alt="Card image cap">
+    </div></div>
+  <% end %>
+  </div>
+</div>
+<div class="example3">
+<%= form_for(@post, url: {controller: 'posts', action: 'create' } ) do |f| %>
+  <div class="field form-group">
+        <%= f.text_area :content,rows: 7,style: 'width:100%;', placeholder: "Compose new micropost..." %>
+  </div>
+    <%= f.submit "post", class: "btn btn-primary" %>
+<% end %>
+</div>
+  </div>
+  <div class="col-8 px-0">
+  <div class="example4">
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+  <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
+  <% for num in 1..20 do %>
+  <div class="media text-muted pt-3">
+    <img2 data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
+    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+      <strong class="d-block text-gray-dark">@username</strong>
+      Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+    </p>
+  </div>
+  <%end %>
+  <small class="d-block text-right mt-3">
+    <a href="#">All updates</a>
+  </small>
+</div>
+
+</div>
+  </div>
+  </div>
+  </div>
+  <div class="col-8">
+  </div>
+ </body>
+</html>
