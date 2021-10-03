@@ -41,8 +41,10 @@ end
 
 # posts
 10.times do |n|
+    participant = Participant.all.sample(1)[0]
     Post.create!(
-        participant: Participant.all.sample(1)[0], 
+        participant: participant, 
+        tournament: participant.tournament,
         content: SecureRandom.alphanumeric(rand(1..140))
     )
 end
