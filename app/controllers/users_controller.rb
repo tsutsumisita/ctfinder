@@ -1,12 +1,21 @@
 class UsersController < ApplicationController
   
-  # get '/users/index'
   def index
     @users = User.all
   end
 
-  # post '/users/search'
   def search
+    web = params[:web]
+    crypt = params[:crypt]
+    reversing = params[:reversing]
+    pwn = params[:pwn]
+    misc = params[:misc]
+    begin
+      @users = User.where("web > ?", web - 1).where("crypt > ?", crypt - 1).where("reversing > ?", reversing - 1).where("pwn > ?", pwn - 1).where("misc > ?", misc - 1)
+    rescue
+      flash.now[:danger] = "検索に失敗しました"
+      render 'show'
+    end
   end
 
   def new
@@ -36,9 +45,8 @@ class UsersController < ApplicationController
   end
 
   private
-  
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :web, :crypt, :reversing, :pwn, :misc, :self_introduction)
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :web, :crypt, :reversing, :pwn, :misc, :self_introduction)
+    end
 
 end
