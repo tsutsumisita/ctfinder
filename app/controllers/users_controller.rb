@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   # get '/users/index'
   def index
+    @users = User.all
   end
 
   # post '/users/search'
