@@ -9,7 +9,7 @@
 require 'securerandom'
 
 # users
-10.times do |n|
+70.times do |n|
     User.create!(
         name: SecureRandom.alphanumeric(rand(10..20)), 
         email: SecureRandom.alphanumeric(rand(10..20)) + "@gmail.com", 
@@ -34,15 +34,15 @@ end
 # participants
 10.times do |n|
     Participant.create!(
-        user_id: User.all.sample(1)[0].id, 
-        tournament_id: Tournament.all.sample(1)[0].id
+        user: User.all.sample(1)[0], 
+        tournament: Tournament.all.sample(1)[0]
     )
 end
 
 # posts
 10.times do |n|
     Post.create!(
-        participant_id: Participant.all.sample(1)[0].id, 
+        participant: Participant.all.sample(1)[0], 
         content: SecureRandom.alphanumeric(rand(1..140))
     )
 end
@@ -51,12 +51,12 @@ end
 10.times do |n|
     liker = User.all.sample(1)[0]
     liked = User.all.sample(1)[0]
-    while liker.id == liked.id do
+    while liker == liked do
         liked = User.all.sample(1)[0]
     end
     Like.create!(
-        liker_id: liker.id,
-        liked_id: liked.id
+        liker: liker,
+        liked: liked
     )
 end
 
@@ -64,19 +64,21 @@ end
 10.times do |n|
     user1 = User.all.sample(1)[0]
     user2 = User.all.sample(1)[0]
-    while user1.id == user2.id do
+    while user1 == user2 do
         user2 = User.all.sample(1)[0]
     end
     Matching.create!(
-        user1_id: user1.id,
-        user2_id: user2.id
+        user1: user1,
+        user2: user2
     )
 end
 
 # direct_message
 10.times do |n|
+    matching = Matching.all.sample(1)[0]
     DirectMessage.create!(
-        matching_id: Matching.all.sample(1)[0].id,
+        matching: matching,
+        sender: [matching.user1, matching.user2].sample(1)[0],
         content: SecureRandom.alphanumeric(rand(1..140))
     )
 end

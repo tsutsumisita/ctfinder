@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_150727) do
+ActiveRecord::Schema.define(version: 2021_10_03_050423) do
 
   create_table "direct_messages", force: :cascade do |t|
     t.integer "matching_id", null: false
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "sender_id", null: false
     t.index ["matching_id"], name: "index_direct_messages_on_matching_id"
+    t.index ["sender_id"], name: "index_direct_messages_on_sender_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -78,6 +80,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_150727) do
   end
 
   add_foreign_key "direct_messages", "matchings"
+  add_foreign_key "direct_messages", "users", column: "sender_id"
   add_foreign_key "likes", "users", column: "liked_id"
   add_foreign_key "likes", "users", column: "liker_id"
   add_foreign_key "matchings", "users", column: "user1_id"
