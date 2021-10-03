@@ -1,2 +1,86 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class="container">
+<div class="row">
+<div class="col-12">
+<%= form_for @user, url: { controller: "users", action: "create" } do |f| %>
+        <div class="row form-group"><%= f.text_field(:name, placeholder:"Name") %></div>
+        <div class="row form-group"><%= f.password_field(:password, placeholder:"Password") %></div>
+        <div class="row form-group"><%= f.email_field(:email, placeholder:"E-mail") %></div>
+        <div class="row form-group"><%= f.text_area(:self_introduction, placeholder:"自己紹介、アピールポイントなど", size: "24x6") %></div>
+
+        
+        <div class="row form-check">
+        Pwn
+        <%= f.radio_button(:pwn, "1") %>
+        <%= f.label(:pwn1, "1") %>
+        <%= f.radio_button(:pwn, "2") %>
+        <%= f.label(:pwn2, "2") %>
+        <%= f.radio_button(:pwn, "3") %>
+        <%= f.label(:pwn3, "3") %>
+        <%= f.radio_button(:pwn, "4") %>
+        <%= f.label(:pwn4, "4") %>
+        <%= f.radio_button(:pwn, "5") %>
+        <%= f.label(:pwn5, "5") %>
+        </div>
+
+        <div class="row form-check">
+        Reversing
+        <%= f.radio_button(:reversing, "1") %>
+        <%= f.label(:reversing1, "1") %>
+        <%= f.radio_button(:reversing, "2") %>
+        <%= f.label(:reversing2, "2") %>
+        <%= f.radio_button(:reversing, "3") %>
+        <%= f.label(:reversing3, "3") %>
+        <%= f.radio_button(:reversing, "4") %>
+        <%= f.label(:reversing4, "4") %>
+        <%= f.radio_button(:reversing, "5") %>
+        <%= f.label(:reversing5, "5") %>
+        </div>
+
+        <div class="row form-check">
+        Crypto
+        <%= f.radio_button(:crypt, "1") %>
+        <%= f.label(:crypt1, "1") %>
+        <%= f.radio_button(:crypt, "2") %>
+        <%= f.label(:crypt2, "2") %>
+        <%= f.radio_button(:crypt, "3") %>
+        <%= f.label(:crypt3, "3") %>
+        <%= f.radio_button(:crypt, "4") %>
+        <%= f.label(:crypt4, "4") %>
+        <%= f.radio_button(:crypt, "5") %>
+        <%= f.label(:crypt5, "5") %>
+        </div>
+
+        <div class="row form-check">
+        Web
+        <%= f.radio_button(:web, "1") %>
+        <%= f.label(:web1, "1") %>
+        <%= f.radio_button(:web, "2") %>
+        <%= f.label(:web2, "2") %>
+        <%= f.radio_button(:web, "3") %>
+        <%= f.label(:web3, "3") %>
+        <%= f.radio_button(:web, "4") %>
+        <%= f.label(:web4, "4") %>
+        <%= f.radio_button(:web, "5") %>
+        <%= f.label(:web5, "5") %>
+        </div>
+
+        <div class="row form-check">
+        Misc
+        <%= f.radio_button(:misc, "1") %>
+        <%= f.label(:misc1, "1") %>
+        <%= f.radio_button(:misc, "2") %>
+        <%= f.label(:misc2, "2") %>
+        <%= f.radio_button(:misc, "3") %>
+        <%= f.label(:misc3, "3") %>
+        <%= f.radio_button(:misc, "4") %>
+        <%= f.label(:misc4, "4") %>
+        <%= f.radio_button(:misc, "5") %>
+        <%= f.label(:misc5, "5") %>
+        </div>
+
+         <%= f.submit("create") %>
+    
+<% end %>
+</div>
+</div>
+</div>
