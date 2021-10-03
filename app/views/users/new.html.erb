@@ -2,15 +2,15 @@
 <div class="row">
 <div class="col-12">
 <%= form_for @user, url: { controller: "users", action: "create" } do |f| %>
-        <div class="row form-group"><%= f.text_field(:name, placeholder:"Name") %></div>
-        <div class="row form-group"><%= f.password_field(:password, placeholder:"Password") %></div>
-        <div class="row form-group"><%= f.email_field(:email, placeholder:"E-mail") %></div>
-        <div class="row form-group"><%= f.text_area(:self_introduction, placeholder:"自己紹介、アピールポイントなど", size: "24x6") %></div>
+        <div class=""><%= f.text_field(:name, placeholder:"Name", class:"form-control") %></div>
+        <div class=""><%= f.password_field(:password, placeholder:"Password", class:"form-control") %></div>
+        <div class=""><%= f.email_field(:email, placeholder:"E-mail", class:"form-control") %></div>
+        <div class=""><%= f.text_area(:self_introduction, placeholder:"自己紹介、アピールポイントなど", size: "24x6", class:"form-control") %></div>
 
         
-        <div class="row form-check">
+        <div class="row form-check text-center">
         Pwn
-        <%= f.radio_button(:pwn, "1") %>
+        <%= f.radio_button(:pwn, "1",) %>
         <%= f.label(:pwn1, "1") %>
         <%= f.radio_button(:pwn, "2") %>
         <%= f.label(:pwn2, "2") %>
@@ -22,21 +22,31 @@
         <%= f.label(:pwn5, "5") %>
         </div>
 
-        <div class="row form-check">
+        <div class="row form-check text-center">
         Reversing
-        <%= f.radio_button(:reversing, "1") %>
-        <%= f.label(:reversing1, "1") %>
-        <%= f.radio_button(:reversing, "2") %>
-        <%= f.label(:reversing2, "2") %>
-        <%= f.radio_button(:reversing, "3") %>
-        <%= f.label(:reversing3, "3") %>
-        <%= f.radio_button(:reversing, "4") %>
-        <%= f.label(:reversing4, "4") %>
-        <%= f.radio_button(:reversing, "5") %>
-        <%= f.label(:reversing5, "5") %>
+        <div class="form-check form-check-inline">
+        <%= f.radio_button(:reversing, "1", class:"form-check-input") %>
+        <%= f.label(:reversing1, "1", class:"form-check-label") %>
+        </div>
+        <div class="form-check form-check-inline">
+        <%= f.radio_button(:reversing, "2", class:"form-check-input") %>
+        <%= f.label(:reversing2, "2", class:"form-check-label") %>
+        </div>
+        <div class="form-check form-check-inline">
+        <%= f.radio_button(:reversing, "3", class:"form-check-input") %>
+        <%= f.label(:reversing3, "3", class:"form-check-label") %>
+        </div>
+        <div class="form-check form-check-inline">
+        <%= f.radio_button(:reversing, "4", class:"form-check-input") %>
+        <%= f.label(:reversing4, "4", class:"form-check-label") %>
+        </div>
+        <div class="form-check form-check-inline">
+        <%= f.radio_button(:reversing, "5", class:"form-check-input") %>
+        <%= f.label(:reversing5, "5", class:"form-check-label") %>
+        </div>
         </div>
 
-        <div class="row form-check">
+        <div class="row form-check text-center">
         Crypto
         <%= f.radio_button(:crypt, "1") %>
         <%= f.label(:crypt1, "1") %>
@@ -50,7 +60,7 @@
         <%= f.label(:crypt5, "5") %>
         </div>
 
-        <div class="row form-check">
+        <div class="row form-check text-center">
         Web
         <%= f.radio_button(:web, "1") %>
         <%= f.label(:web1, "1") %>
@@ -64,7 +74,7 @@
         <%= f.label(:web5, "5") %>
         </div>
 
-        <div class="row form-check">
+        <div class="row form-check text-center">
         Misc
         <%= f.radio_button(:misc, "1") %>
         <%= f.label(:misc1, "1") %>
@@ -78,9 +88,9 @@
         <%= f.label(:misc5, "5") %>
         </div>
 
-         <%= f.submit("create") %>
+         <%= f.submit("Sign up", class: "btn btn-lg btn-primary btn-block") %>
     
 <% end %>
 </div>
 </div>
-</div>g
+</div>
