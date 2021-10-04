@@ -6,12 +6,12 @@ class UsersController < ApplicationController
 
   def search
     web = params[:web]
-    crypt = params[:crypt]
+    crypto = params[:crypto]
     reversing = params[:reversing]
     pwn = params[:pwn]
     misc = params[:misc]
     begin
-      @users = User.where("web > ?", web - 1).where("crypt > ?", crypt - 1).where("reversing > ?", reversing - 1).where("pwn > ?", pwn - 1).where("misc > ?", misc - 1)
+      @users = User.where("web > ?", web - 1).where("crypto > ?", crypto - 1).where("reversing > ?", reversing - 1).where("pwn > ?", pwn - 1).where("misc > ?", misc - 1)
     rescue
       flash.now[:danger] = "検索に失敗しました"
       render 'show'
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :web, :crypt, :reversing, :pwn, :misc, :self_introduction)
+      params.require(:user).permit(:name, :email, :password, :web, :crypto, :reversing, :pwn, :misc, :self_introduction)
     end
 
 end
