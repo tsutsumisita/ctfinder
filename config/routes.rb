@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post    '/users/:liked_id/like',  to: 'likes#create', liked_id: /\d+/
   post    '/tournaments/:id/post',  to: 'posts#create', id: /\d+/
   
-  get '/users/:id/direct_massages', to: 'direct_messages#show'
+  get '/users/:id/direct_messages', to: 'direct_messages#show'
   post '/users/:id/direct_messages', to: 'direct_messages#create'
  
   get '/all_users' , to: 'users#all_users'

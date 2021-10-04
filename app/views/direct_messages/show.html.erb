@@ -1,0 +1,61 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<%= stylesheet_link_tag "direct_messages", :media => "all" %>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">        
+        <!--=========================================================-->
+        <!-- selected chat -->
+    	<div class="col-12 bg-white ">
+            <div class="chat-message">
+                <ul class="chat">
+                    <% @dms.each do |dm| %>
+                        <% if params[:id].to_i == dm.sender_id %>
+                            <li class="left clearfix">
+                                <span class="chat-img pull-left">
+                                    <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font">
+                                            <% if User.find(Matching.find(dm.matching_id).user1_id) == dm.sender_id %>
+                                                <%= User.find(Matching.find(dm.matching_id).user1_id).name %>
+                                            <% else %>
+                                                <%= User.find(Matching.find(dm.matching_id).user2_id).name %>
+                                            <% end %>
+                                        </strong>
+                                        <small class="pull-right text-muted"><i class="fa fa-clock-o"></i><%= dm.created_at %></small>
+                                    </div>
+                                    <p>
+                                        <%= dm.content %>
+                                    </p>
+                                </div>
+                            </li>
+                        <% else %>
+                            <li class="right clearfix">
+                                <span class="chat-img pull-right">
+                                    <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font"><%= my_name = User.find(dm.sender_id).name %></strong>
+                                        <small class="pull-right text-muted"><i class="fa fa-clock-o"></i><%= dm.created_at %></small>
+                                    </div>
+                                    <p>
+                                        <%= dm.content %>
+                                    </p>
+                                </div>
+                            </li>
+                        <% end %>                                            
+                    <% end %>
+                </ul>
+            </div>
+            <%= form_for @direct_message, url: { controller: "direct_messages", action: "create" } do |f| %>
+                 <div class="chat-box bg-white">
+                    <div class="input-group">
+                        <%= f.text_field(:content, placeholder:"Type your message here", class:"form-control border no-shadow no-rounded") %>
+                        <%= f.submit("Send", class: "btn btn-success no-rounded") %>
+                    </div>
+                </div>
+            <% end %>     
+		</div>        
+	</div>
+</div>
