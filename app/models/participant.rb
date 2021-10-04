@@ -12,6 +12,7 @@ class Participant < ApplicationRecord
     belongs_to :user
     belongs_to :tournament
     has_many :post, dependent: :destroy 
+    has_one :action, dependent: :destroy 
 
     validates_with NameValidator
 end
