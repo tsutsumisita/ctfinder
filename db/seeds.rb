@@ -15,7 +15,7 @@ require 'securerandom'
         email: SecureRandom.alphanumeric(rand(10..20)) + "@gmail.com", 
         password: "tintin#{n}", 
         web: [5, [n/2, 1].max].min,
-        crypt: [5, [n/2, 1].max].min,
+        crypto: [5, [n/2, 1].max].min,
         reversing: [5, [n/2, 1].max].min,
         pwn: [5, [n/2, 1].max].min,
         misc: [5, [10, 1].max].min,
