@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root path
   root 'static_pages#home'
   
-  resources :users, only: [:show, :create, :new]
+  resources :users, only: [:show, :create, :new, :index]
   resources :tournaments, only: [:index, :show]
   
   get   '/login',   to: 'sessions#new'
@@ -17,6 +17,5 @@ Rails.application.routes.draw do
   
   get '/users/:id/direct_massages', to: 'direct_messages#show'
   post '/users/:id/direct_messages', to: 'direct_messages#create'
- 
-  get '/all_users' , to: 'users#all_users'
+
 end
