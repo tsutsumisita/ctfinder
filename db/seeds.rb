@@ -90,8 +90,8 @@ end
 # action
 10.times do |n|
     post = Post.all.sample(1)[0]
-    participant = post.participant.sample(1)[0]
-    user = participant.user.sample(1)[0]
+    participant = post.participant
+    user = participant.user
     Action.create!(
         participant: participant,
 	post: post,
