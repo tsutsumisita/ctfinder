@@ -4,6 +4,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def all_users
+  end
+
   def search
     web = params[:web]
     crypto = params[:crypto]
