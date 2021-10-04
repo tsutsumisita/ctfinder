@@ -11,9 +11,9 @@ class LikesController < ApplicationController
             unless Like.find_by(liker: liked_user, liked: current_user).nil?
                 Matching.create!(user1: current_user, user2: liked_user)
                 flash.now[:success] = "マッチングしました！"
-                render "/users/#{liked_user.id}"
+                render :show
             end
-        elsif
+        else
             flash[:danger] = "failed to save Like model."
         end
     end

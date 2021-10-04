@@ -41,8 +41,13 @@ class UsersController < ApplicationController
 
   def destroy
     user = current_user
-    user.destroy unless !user.nil?
-    redirect_to root_url, success: "さようなら！！"
+    unless user.nil?
+      user.destroy
+      redirect_to root_url, success: "さようなら！！"
+    else
+      flash[:danger] = "ログインしていません"
+      redirect_to root_url
+    end
   end
 
   private

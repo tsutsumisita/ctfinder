@@ -9,15 +9,8 @@ class PostsController < ApplicationController
         if @post.save
             flash.now[:success] = "投稿しました"
             redirect_to tournament_path
-        elsif
+        else
             flash[:danger] = "投稿に失敗しました"
-        end
-    end
-
-    def logged_in_user
-        unless logged_in?
-            flash[:alert] = "ログインしてください"
-            redirect_to login_url
         end
     end
 
