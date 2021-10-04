@@ -2,7 +2,7 @@ class DirectMessagesController < ApplicationController
   before_action :matching_find, only: [:show, :create]
 
   def show
-    @dms = DirectMessage.find_by(matching: @matching)
+    @dms = DirectMessage.where(matching: @matching).order(created_at: :asc)
   end
 
   def create
