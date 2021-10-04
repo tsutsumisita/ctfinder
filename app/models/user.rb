@@ -28,7 +28,7 @@ class User < ApplicationRecord
     has_secure_password
     validates :password, presence:true, length: { minimum: 4 }
         # for skill
-    validates_with UserSkillValidator, fields: [:web, :crypt, :reversing, :pwn, :misc]
+    validates_with UserSkillValidator, fields: [:web, :crypto, :reversing, :pwn, :misc]
 
     validates :self_introduction, presence: true, length: { maximum: 200 }
 
