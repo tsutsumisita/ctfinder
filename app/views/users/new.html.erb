@@ -1,6 +1,7 @@
 <div class="container">
 <div class="row">
 <div class="col-12">
+
 <%= form_for @user, url: { controller: "users", action: "create" } do |f| %>
         <div class=""><%= f.text_field(:name, placeholder:"Name", class:"form-control") %></div>
         <div class=""><%= f.password_field(:password, placeholder:"Password", class:"form-control") %></div>
