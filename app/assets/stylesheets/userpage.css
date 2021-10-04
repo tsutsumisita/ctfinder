@@ -22,3 +22,15 @@
     border-bottom: 4px solid #c5394d;
     border-radius: 5px;
 }
+.button-DM{
+    width: 100%;
+    max-width: 500px;
+    padding: 30px 10px;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background-color: #668ad8;
+    border-bottom: 4px solid #627295;
+    border-radius: 5px;
+}
