@@ -14,11 +14,11 @@ require 'securerandom'
         name: SecureRandom.alphanumeric(rand(10..20)), 
         email: SecureRandom.alphanumeric(rand(10..20)) + "@gmail.com", 
         password: "tintin#{n}", 
-        web: [5, [n/2, 1].max].min,
-        crypto: [5, [n/2, 1].max].min,
-        reversing: [5, [n/2, 1].max].min,
-        pwn: [5, [n/2, 1].max].min,
-        misc: [5, [10, 1].max].min,
+        web: rand(1..5),
+        crypto: rand(1..5), 
+        reversing: rand(1..5),
+        pwn: rand(1..5), 
+        misc: rand(1..5), 
         self_introduction: "俺がナンバーワンだ！"
     )
 end
@@ -87,14 +87,40 @@ end
     )
 end
 
-# action
-10.times do |n|
-    post = Post.all.sample(1)[0]
-    participant = post.participant
-    user = participant.user
-    Action.create!(
-        participant: participant,
-	post: post,
-	user: user,
+# post_action
+post_all = Post.all
+posts = []
+ids = []
+post_all.each do |p|
+    unless ids.include?(p.participant.user.id)
+        posts.push(p)
+	ids.push(p.participant.user.id)
+	break ids.size == 5
+    end
+end
+
+posts.each do |p|
+    PostAction.create!(
+        post: p,
+	user: p.participant.user
+    )
+end
+
+# participant_action
+participant_all = Participant.all
+participants = []
+ids = []
+participant_all.each do |p|
+    unless ids.include?(p.user.id)
+        participants.push(p)
+	ids.push(p.user.id)
+	break ids.size == 5
+    end
+end
+
+participants.each do |p|
+    ParticipantAction.create!(
+        participant: p,
+	user: p.user
     )
 end

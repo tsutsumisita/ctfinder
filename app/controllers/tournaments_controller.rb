@@ -13,13 +13,12 @@ class TournamentsController < ApplicationController
 
   def join
     @tournament = Tournament.find(params[:tournament_id])
-    if !@tournament.nil? && \
-      current_user.participants.build(tournament: @tournament, name: current_user.name).save
-      if Action.where(user: current_user).exists?
-	  Action.find_by(user: current_user).destroy
+    participant = current_user.participants.build(tournament: @tournament, name: current_user.name)
+    if !@tournament.nil? && participant.save
+      if ParticipantAction.where(user: current_user).exists?
+	  ParticipantAction.find_by(user: current_user).destroy
       end
-      participant = @tournament.participants.find(user: current_user)
-      Action.create!(participant: participant, post: nil, user: current_user)
+      ParticipantAction.create!(participant: participant, user: current_user)
 
       flash[:debug] = "success participant."
       render :index
