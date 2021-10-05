@@ -148,164 +148,215 @@
 }
 
 </style>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"
+  integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg=="
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@next/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
 <div class="container">
   <div class="page-header">
     <h1 id="timeline">Timeline</h1>
   </div>
  
-  <%= form_tag({ controller: "users", action: "search" } )do  %>
+<%= form_tag({ controller: "users", action: "search" } )do  %>
   <div class="row">
     <div class="col-md-3">
-    <label> Pwn </label>
-    <%= select_tag('pwn',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
-   </div><div class="col-md-3">
-    <label> Reversing </label>
-    <%= select_tag('reversing',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
-   </div>
-   <div class="col-md-3">
-    <label> Crypt </label>
-    <%= select_tag('crypto',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
-   </div>
-   <div class="col-md-3">
-    <label> Web </label>
-    <%= select_tag('web',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
-   </div>
-   <div class="col-md-3">
-    <label> Misc </label>
-    <%= select_tag('misc',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
-   </div>
-  </div>
-   <div class=" text-center">
-   <%= submit_tag("Query",class:"btn btn-primary btn-lg")  %>
-   </div>
-  <% end %>
-  
-
-  <!--
-  <form method="post" action="">
-  <div class="row">
- 
-   <div class="col-md-3">
-            <label for="country">Pwn</label>
-            <select class="custom-select d-block w-100" id="pwn" name="pwn" required>
-              <option value="">Choose...</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-            <div class="invalid-feedback">
-              Please select a valid country.
-            </div>
+      <label> Pwn </label>
+      <%= select_tag('pwn',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
-            <label for="state">Reversing</label>
-            <select class="custom-select d-block " id="reversing"name="reversing" required>
-              <option value="">Choose...</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
-     </div>
-
-     <div class="col-md-3">
-            <label for="state">Crypt</label>
-            <select class="custom-select d-block " id="crypto" name="crypto" required>
-              <option value="">Choose...</option>
-             <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
-     </div>
-     <div class="col-md-3">
-            <label for="state">Web</label>
-            <select class="custom-select d-block " id="web" name="web" required>
-              <option value="">Choose...</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
-     </div>
-     <div class="col-md-3">
-            <label for="state">Misc</label>
-            <select class="custom-select d-block " id="misc" name="misc" required>
-              <option value="">Choose...</option>
-             <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
-            </div>
-     </div>
-      </div>
-      <div class="text-center">
-   <button type="submit" class="btn btn-primary btn-lg">Query</button>
-   </div>
-    </form>
-    -->
+      <label> Reversing </label>
+      <%= select_tag('reversing',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+    </div>
+    <div class="col-md-3">
+      <label> Crypt </label>
+      <%= select_tag('crypto',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+    </div>
+    <div class="col-md-3">
+      <label> Web </label>
+      <%= select_tag('web',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+    </div>
+    <div class="col-md-3">
+      <label> Misc </label>
+      <%= select_tag('misc',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+    </div>
+  </div>
+  <div class=" text-center">
+    <%= submit_tag("Query",class:"btn btn-primary btn-lg")  %>
+  </div>
+  
+<% end %>
    
-       
 
-  <ul class="timeline">
-    <li>
-      <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
-        <div class="timeline-panel">
-          <div class="timeline-heading">
-            <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via Twitter</small></p>
-          </div>
-          <div class="timeline-body">
-            <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo.
-            eci latim. Interessantiss quisso pudis.</p>
-          </div>
-        </div>
-      
-    </li>
-    <li class="timeline-inverted">
-      <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
-        <div class="timeline-panel">
-          <div class="timeline-heading">
-           <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-          </div>
-          <div class="timeline-body">
-            <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo.
-            nadis i pareci latim. Intebolis eu num gostis.</p>       
-          </div>
-        </div>
-      
-    </li>
-    <li>
-      <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
-        <div class="timeline-panel">
-          <div class="timeline-heading">
-            <h4 class="timeline-title">Mussum ipsum cacilds</h4>
-          </div>
-          <div class="timeline-body">
-            <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo.
-              Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+    
+
+
+
+ <ul class="timeline">
+  <% @users.each_with_index do |usr,x| %>
+  <% if x < 10 %>
+    <% if x % 2 == 0 %>
+      <li>
+          <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+     <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4 class="timeline-title"><%= usr.name %></h4>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via Twitter</small></p>
+            </div>
+            <div class="timeline-body">
+              <p><%= usr.self_introduction %></p>
+            </div>
+                
+        <div class="col-xl-7" style="background-color:white;">
+          <div class="mx-auto" style="width:auto;">
+
+            <!--レーダーグラフ-->
+            <div style="width:auto">
+              <canvas id="<%=usr.name %>"></canvas>
+            </div>
+            <script>
+             
+            var ctx = document.getElementById('<%= usr.name %>');
+            var myChart = new Chart(ctx, {
+              type: 'radar',
+              data: {
+                labels: ['Pwn', 'Reversing', 'Crypto', 'Web', 'Misc'],
+                datasets: [{
+                  label: '',
+                  data: [ <%= usr.pwn %>, <%= usr.reversing %>, <%= usr.crypto %>, <%= usr.web %>, <%= usr.misc %>],
+                  // データライン
+                  borderColor: 'rgba(255,30,30,1)',
+                  pointBackgroundColor: 'rgba(255,30,30,1)',
+                  borderWidth: 2,
+                  backgroundColor: 'rgba(139,0,0,0.3)',
+                }],
+               
+              },
+              options: {
+                plugins: 
+                {legend:{display:false},
+                }
+              ,                  
+                scales: {
+                  r: {
+                    // 最小値・最大値
+                    min: 0,
+                    max: 5,
+                    // 背景色
+                    backgroundColor: 'white',
+                    // グリッドライン
+                    grid: {
+                      color: 'silver',
+                    },
+                    // アングルライン
+                    angleLines: {
+                      color: 'silver',
+                    },
+                    // ポイントラベル
+                    pointLabels: {
+                      fontSize: 30,
+                      color: 'black',
+                      backdropColor: 'white',
+                      backdropPadding: 0,
+                      padding: 0,
+                    },
+                  },
+                },
+              },
+            });
+            </script>
           </div>
         </div>
       </div>
-    </li>
-  </ul>
+ </li>
+   <% else %>
+    
+  <li class="timeline-inverted">
+     
+        <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+    <div class="timeline-panel">
+    
+        <div class="timeline-heading">
+              <h4 class="timeline-title"><%= usr.name %> </h4>
+              <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via Twitter</small></p>
+        </div>
+            <div class="timeline-body">
+              <p><%= usr.self_introduction %></p>
+            </div>
+         
+          <div class="col-xl-7" style="background-color:white;">
+            <div class="mx-auto" style="width:auto;">
+
+              <!--レーダーグラフ-->
+              <div style="width:auto">
+                <canvas id="<%= usr.name %>"></canvas>
+              </div>
+             
+            <script>
+              var ctx = document.getElementById('<%= usr.name %>');
+              var myChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                  labels: ['Pwn', 'Reversing', 'Crypto', 'Web', 'Misc'],
+                  datasets: [{
+                    label: "value",
+                    data: [ <%= usr.pwn %>, <%= usr.reversing %>, <%= usr.crypto %>, <%= usr.web %>, <%= usr.misc %>],
+                    // データライン
+                    borderColor: 'rgba(255,30,30,1)',
+                    pointBackgroundColor: 'rgba(255,30,30,1)',
+                    borderWidth: 2,
+                    backgroundColor: 'rgba(139,0,0,0.3)',
+                  }],
+                },
+                options: {
+                  title: {display:"value", text:"value"},
+                  plugins: 
+                    {legend:{display:false},
+                },
+                 
+                  scales: {
+                    r: {
+                      // 最小値・最大値
+                      min: 0,
+                      max: 5,
+                      // 背景色
+                      backgroundColor: 'white',
+                      // グリッドライン
+                      grid: {
+                        color: 'silver',
+                      },
+                      // アングルライン
+                      angleLines: {
+                        color: 'silver',
+                      },
+                      // ポイントラベル
+                      pointLabels: {
+                        fontSize: 30,
+                        color: 'black',
+                        backdropColor: 'white',
+                        backdropPadding: 0,
+                        padding: 0,
+                      },
+                    },
+                  },
+                },
+              });
+            </script>
+            </div>
+          </div> 
+      </div>
+  </li>
+   <% end %>
+
+
+<% end %> 
+  
+<% end %> 
+</ul>
+
 </div>
+
+    
+   
+  
