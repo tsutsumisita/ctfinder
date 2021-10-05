@@ -87,14 +87,40 @@ end
     )
 end
 
-# action
-10.times do |n|
-    post = Post.all.sample(1)[0]
-    participant = post.participant
-    user = participant.user
-    Action.create!(
-        participant: participant,
-	post: post,
-	user: user,
+# post_action
+post_all = Post.all
+posts = []
+ids = []
+post_all.each do |p|
+    unless ids.include?(p.participant.user.id)
+        posts.push(p)
+	ids.push(p.participant.user.id)
+	break ids.size == 5
+    end
+end
+
+posts.each do |p|
+    PostAction.create!(
+        post: p,
+	user: p.participant.user
+    )
+end
+
+# participant_action
+participant_all = Participant.all
+participants = []
+ids = []
+participant_all.each do |p|
+    unless ids.include?(p.user.id)
+        participants.push(p)
+	ids.push(p.user.id)
+	break ids.size == 5
+    end
+end
+
+participants.each do |p|
+    ParticipantAction.create!(
+        participant: p,
+	user: p.user
     )
 end
