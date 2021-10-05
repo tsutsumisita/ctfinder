@@ -9,16 +9,41 @@
 <meta charset="utf-8">
 <title>TEST</title>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="./test.css">
 <%= stylesheet_link_tag "userpage", :media => "all" %>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"
   integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg=="
   crossorigin="anonymous"></script>
-<script
-  src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@next/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script　src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@next/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </head>
 <body>
+
+<%# login-success flash message %>
+<% if flash[:success] %>
+  <div class="container">
+    <p class="alert alert-success h4">
+      <%= flash[:success] %>
+    </p>
+  </div>
+<% end %>
+
+<%# no-matching flash message %>
+<% if flash[:alert] %>
+  <div class="container">
+    <p class="alert alert-danger h4">
+      <%= flash[:alert] %>
+    </p>
+  </div>
+<% end %>
+
+<%# matching-complete flash message %>
+<% if flash[:matching_success] %>
+  <div class="container">
+    <p class="alert alert-success h4">
+      <%= flash[:matching_success] %>
+    </p>
+  </div>
+<% end %>
 
 <div class="container">
   <div class="row">
@@ -43,8 +68,8 @@
 
     <div class="col-xl-7" style="background-color:white;">
       <div class="mx-auto" style="width:auto;">
-        <!--レーダーグラフ-->
 
+        <!--レーダーグラフ-->
         <div style="width:auto">
           <canvas id="mychart"></canvas>
         </div>
@@ -60,12 +85,15 @@
               // データライン
               borderColor: 'rgba(255,30,30,1)',
               pointBackgroundColor: 'rgba(255,30,30,1)',
-              borderWidth: 2,
-              backgroundColor: 'rgba(139,0,0,0.3)',
+              borderWidth: 3,
+              backgroundColor: 'rgba(139,0,0,0.3)'
             }],
           },
           options: {
             title: {display:false},
+             plugins: 
+                    {legend:{display:false},
+                },
             scales: {
               r: {
                 // 最小値・最大値
@@ -89,22 +117,33 @@
                   backdropPadding: 0,
                   padding: 0,
                 },
-              },
-            },
+              },      
+            },  
+            ticks:{
+            stepSize:1
           },
-        });s
+          },
+        });
         </script>
       </div>
     </div>
   </div>
 </div>
-<div class="container" class="bg-info d-flex align-items-center justify-content-center" style="background-color:white;">
+<div class="container" class="bg-info d-flex align-items-center justify-content-center">
       <!--ボタン-->
       <div class="mx-auto" style="width: 400px;">
-      <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, class:"button-like"} %>
+      <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, liked_id: params[:id], class:"button-like"} %>
       </div>
 </div>
-  
+
+<% if matching_find %>
+  <div class="container" class="bg-info d-flex align-items-center justify-content-center">
+      <!--ダイレクトメッセージ-->
+      <div class="mx-auto" style="width: 400px;">
+      <%= button_to "DMを送信", "/users/#{@user.id}/direct_messages", {method: :get, class:"button-DM"} %>
+      </div>
+  </div> 
+<% end %>
 
 </div>
 

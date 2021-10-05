@@ -12,6 +12,9 @@ class DirectMessage < ApplicationRecord
   belongs_to :matching
   belongs_to :sender, class_name: "User"
 
+  validates :matching, presence: true
+  validates :sender, presence: true
+
   validates :content, length: { maximum: 140, minimum: 1 }, null: false
   validates_with DmValidator
 end

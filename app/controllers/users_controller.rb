@@ -7,16 +7,17 @@ class UsersController < ApplicationController
  
 
   def search
-    web = params[:web]
-    crypto = params[:crypto]
-    reversing = params[:reversing]
-    pwn = params[:pwn]
-    misc = params[:misc]
+    web = params[:web].to_i
+    crypto = params[:crypto].to_i
+    reversing = params[:reversing].to_i
+    pwn = params[:pwn].to_i
+    misc = params[:misc].to_i
     begin
       @users = User.where("web > ?", web - 1).where("crypto > ?", crypto - 1).where("reversing > ?", reversing - 1).where("pwn > ?", pwn - 1).where("misc > ?", misc - 1)
+      render 'index'
     rescue
       flash.now[:danger] = "検索に失敗しました"
-      render 'show'
+      render 'index'
     end
   end
 
