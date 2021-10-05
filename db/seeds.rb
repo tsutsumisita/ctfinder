@@ -15,10 +15,10 @@ require 'securerandom'
         email: SecureRandom.alphanumeric(rand(10..20)) + "@gmail.com", 
         password: "tintin#{n}", 
         web: rand(1..5),
-        crypto: rand(1..5), 
+        crypto: rand(1..5),
         reversing: rand(1..5),
-        pwn: rand(1..5), 
-        misc: rand(1..5), 
+        pwn: rand(1..5),
+        misc: rand(1..5),
         self_introduction: "俺がナンバーワンだ！"
     )
 end

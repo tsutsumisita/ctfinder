@@ -12,10 +12,9 @@ class UsersController < ApplicationController
     reversing = params[:reversing].to_i
     pwn = params[:pwn].to_i
     misc = params[:misc].to_i
-  
     begin
       @users = User.where("web > ?", web - 1).where("crypto > ?", crypto - 1).where("reversing > ?", reversing - 1).where("pwn > ?", pwn - 1).where("misc > ?", misc - 1)
-      redirect_to root_url
+      render 'index'
     rescue
       flash.now[:danger] = "検索に失敗しました"
       render 'index'
