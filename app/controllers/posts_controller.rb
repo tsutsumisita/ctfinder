@@ -7,10 +7,10 @@ class PostsController < ApplicationController
         @participant = @tournament.participants.find(user: current_user)
         @post = @participant.posts.build(post_params)
 	if @post.save
-	    if Action.find(user: current_user).exists?
-	        Action.find(user: current_user).destroy
+	    if Action.where(user: current_user).exists?
+	        Action.find_by(user: current_user).destroy
 	    end
-	    Action.create(participant: nil, post: @post, user: current_user)
+	    Action.create!(participant: nil, post: @post, user: current_user)
             flash.now[:success] = "投稿しました"
             redirect_to tournament_path
         else

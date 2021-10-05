@@ -15,11 +15,11 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:tournament_id])
     if !@tournament.nil? && \
       current_user.participants.build(tournament: @tournament, name: current_user.name).save
-      if Action.find(user: current_user).exists?
-	  Action.find(user: current_user).destroy
+      if Action.where(user: current_user).exists?
+	  Action.find_by(user: current_user).destroy
       end
       participant = @tournament.participants.find(user: current_user)
-      Action.create(participant: participant, post: nil, user: current_user)
+      Action.create!(participant: participant, post: nil, user: current_user)
 
       flash[:debug] = "success participant."
       render :index
