@@ -12,10 +12,11 @@ class DirectMessagesController < ApplicationController
       dm.matching = @matching
       dm.sender_id = current_user.id
       if dm.save
-        p dm
-	      redirect_to "/users/#{params[:id]}/direct_messages/", notice: "ダイレクトメッセージが送信されました"
+        flash[:success] = "ダイレクトメッセージが送信されました"
+        redirect_to "/users/#{params[:id]}/direct_messages/"
       else
-        flash.now[:danger] = "ダイレクトメッセージの送信に失敗しました"
+        flash[:danger] = "ダイレクトメッセージの送信に失敗しました"
+        redirect_to "/users/#{params[:id]}/direct_messages/"
       end
     end
   end

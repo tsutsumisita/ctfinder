@@ -4,7 +4,23 @@
     <div class="row">        
         <!--=========================================================-->
         <!-- selected chat -->
-    	<div class="col-12 bg-white ">
+    	<div class="col-12">
+            <%# direct-message-success flash message %>
+            <% if flash[:success] %>
+                <div class="container">
+                    <p class="alert alert-success h4">
+                        <%= flash[:success] %>
+                    </p>
+                </div>
+            <% end %>
+            <%# direct-message-failed flash message %>
+            <% if flash[:danger] %>
+                <div class="container">
+                    <p class="alert alert-danger h4">
+                        <%= flash[:danger] %>
+                    </p>
+                </div>
+            <% end %>
             <div class="chat-message">
                 <ul class="chat">
                     <% @dms.each do |dm| %>

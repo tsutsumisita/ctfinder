@@ -1,3 +1,11 @@
+<%# login-failed flash message %>
+<% if flash.now[:danger] %>
+  <div class="container">
+    <p class="alert alert-success h4">
+      <%= flash.now[:danger] %>
+    </p>
+  </div>
+<% end %>
 
 <div class="container">
 <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
