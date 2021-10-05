@@ -36,7 +36,14 @@
   </div>
 <% end %>
 
-
+<%# matching-complete flash message %>
+<% if flash[:matching_success] %>
+  <div class="container">
+    <p class="alert alert-success h4">
+      <%= flash[:matching_success] %>
+    </p>
+  </div>
+<% end %>
 
 <div class="container">
   <div class="row">
@@ -125,7 +132,7 @@
 <div class="container" class="bg-info d-flex align-items-center justify-content-center">
       <!--ボタン-->
       <div class="mx-auto" style="width: 400px;">
-      <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, class:"button-like"} %>
+      <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, liked_id: params[:id], class:"button-like"} %>
       </div>
 </div>
 
