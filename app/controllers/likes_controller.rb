@@ -2,7 +2,7 @@ class LikesController < ApplicationController
 
     def create
         liked_user = User.find(params[:liked_id])
-        if current_user.nil? || liked_user.nil? || current_user == liked_user
+        if current_user.nil?
             flash[:login_need] = 'ログインしてください'
             redirect_to login_url
             return
@@ -15,7 +15,7 @@ class LikesController < ApplicationController
                 redirect_to "/users/#{params[:liked_id]}/"
             end
         else
-            flash[:danger] = "failed to save Like model."
+            flash[:danger] = "自分のこと好き過ぎん？ｗｗｗ"
         end
     end
 
