@@ -18,6 +18,7 @@ class User < ApplicationRecord
     has_many :user1_matching, class_name: "Matching", foreign_key: "user1_id", dependent: :destroy
     has_many :user2_matching, class_name: "Matching", foreign_key: "user2_id", dependent: :destroy
     has_many :sender_direct_message, class_name: "DirectMessage", foreign_key: "sender_id", dependent: :destroy
+    has_one :action, dependent: :destroy 
     
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     
