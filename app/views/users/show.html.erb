@@ -58,12 +58,15 @@
               // データライン
               borderColor: 'rgba(255,30,30,1)',
               pointBackgroundColor: 'rgba(255,30,30,1)',
-              borderWidth: 2,
-              backgroundColor: 'rgba(139,0,0,0.3)',
+              borderWidth: 3,
+              backgroundColor: 'rgba(139,0,0,0.3)'
             }],
           },
           options: {
             title: {display:false},
+             plugins: 
+                    {legend:{display:false},
+                },
             scales: {
               r: {
                 // 最小値・最大値
@@ -87,8 +90,11 @@
                   backdropPadding: 0,
                   padding: 0,
                 },
-              },
-            },
+              },      
+            },  
+            ticks:{
+            stepSize:1
+          },
           },
         });
         </script>
