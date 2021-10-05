@@ -12,11 +12,11 @@ class LikesController < ApplicationController
             unless Like.find_by(liker: liked_user, liked: current_user).nil?
                 Matching.create!(user1: current_user, user2: liked_user)
                 flash[:matching_success] = "マッチングしました！"
-                redirect_to "/users/#{params[:liked_id]}/"
             end
         else
-            flash[:danger] = "自分のこと好き過ぎん？ｗｗｗ"
+            flash[:danger] = "Likeに失敗しました"
         end
+        redirect_to "/users/#{params[:liked_id]}/"
     end
 
 end
