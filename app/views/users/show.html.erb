@@ -19,6 +19,26 @@
 </head>
 <body>
 
+<%# login-success flash message %>
+<% if flash[:success] %>
+  <div class="container">
+    <p class="alert alert-success h4">
+      <%= flash[:success] %>
+    </p>
+  </div>
+<% end %>
+
+<%# no-matching flash message %>
+<% if flash[:alert] %>
+  <div class="container">
+    <p class="alert alert-danger h4">
+      <%= flash[:alert] %>
+    </p>
+  </div>
+<% end %>
+
+
+
 <div class="container">
   <div class="row">
     <div class="col-xl-5" style="background-color:white;">
