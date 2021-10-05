@@ -45,6 +45,15 @@
   </div>
 <% end %>
 
+<%# self-like flash message %>
+<% if flash[:danger] %>
+  <div class="container">
+    <p class="alert alert-danger h4">
+      <%= flash[:danger] %>
+    </p>
+  </div>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-xl-5" style="background-color:white;">
