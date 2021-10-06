@@ -3,12 +3,13 @@
     margin: 0 auto;
 }
 .trim-image-to-circle {
-    background-image: url("./koji.jpg");  /* 表示する画像 */
+    background-image: url();  /* 表示する画像 */
     width:  200px;       /* ※縦横を同値に */
     height: 200px;       /* ※縦横を同値に */
     border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
     background-position: center center;  /* 横長画像の中央を基準に表示 */
     display: inline-block;          /* 複数の画像を横に並べたい場合 */
+    border: 1px solid #000;
 }
 .button-like{
     width: 100%;
