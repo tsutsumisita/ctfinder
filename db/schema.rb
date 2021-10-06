@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_05_064129) do
+ActiveRecord::Schema.define(version: 2021_10_06_060419) do
 
   create_table "direct_messages", force: :cascade do |t|
     t.integer "matching_id", null: false
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 2021_10_05_064129) do
     t.index ["tournament_id"], name: "index_posts_on_tournament_id"
   end
 
+  create_table "recent_actions", force: :cascade do |t|
+    t.integer "action"
+    t.integer "user_id", null: false
+    t.integer "tournament_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tournament_id"], name: "index_recent_actions_on_tournament_id"
+    t.index ["user_id"], name: "index_recent_actions_on_user_id"
+  end
+
   create_table "tournaments", force: :cascade do |t|
     t.string "name"
     t.time "date"
@@ -114,4 +124,6 @@ ActiveRecord::Schema.define(version: 2021_10_05_064129) do
   add_foreign_key "post_actions", "users"
   add_foreign_key "posts", "participants"
   add_foreign_key "posts", "tournaments"
+  add_foreign_key "recent_actions", "tournaments"
+  add_foreign_key "recent_actions", "users"
 end

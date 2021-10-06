@@ -20,5 +20,4 @@ Rails.application.routes.draw do
   
   post '/users/:id/direct_messages', to: 'direct_messages#create'
 
-  post '/users/search', to: 'users#search'
 end

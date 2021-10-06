@@ -15,12 +15,17 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:tournament_id])
     participant = current_user.participants.build(tournament: @tournament, name: current_user.name)
     if !@tournament.nil? && participant.save
-      if ParticipantAction.where(user: current_user).exists?
-	  ParticipantAction.find_by(user: current_user).destroy
+      # if ParticipantAction.where(user: current_user).exists?
+	    #   ParticipantAction.find_by(user: current_user).destroy
+      # end
+      # ParticipantAction.create!(participant: participant, user: current_user)
+      if RecentAction.where(user: current_user).exists?
+        RecentAction.find_by(user: current_user).destroy
       end
-      ParticipantAction.create!(participant: participant, user: current_user)
-
-      flash[:debug] = "success participant."
+      unless RecentAction.new(action: 2, user: current_user, tourment: @tournament).save
+        flash[:debug] = "failed to save recent action."
+        redirect_to root_url
+      end
       render :index
     else
       flash[:danger] = "参加に失敗しました"
