@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
  <head>
  <style>
  .example4 {
@@ -8,6 +6,14 @@ height: 600pt;
 }
 .percent {
     width: 100%;
+  }
+  .percent2 {
+    width: 75%;
+    background-color: #99FFFF;
+  }
+  .percent3 {
+    width: 75%;
+    background-color: #FFCCFF;
   }
 .mozi2 {
     font-size: 1.5em;
@@ -30,13 +36,14 @@ height: 600pt;
    <div class="container-fluid">
  <div class="row align-items-center">
  <div class="col-9">
-     <strong class="d-block text-gray-dark mozi2"><%= ts_and_ps[:tournament].name %></strong>
+     <strong class="d-block text-gray-dark mozi2"><%= link_to ts_and_ps[:tournament].name ,"/tournaments/#{ts_and_ps[:tournament].id}/", method: :get %></strong>
    </p></div>
    <div class="col-3">
   <%if ts_and_ps[:join] then %>
-  <button type="button" class="btn btn-secondary w-75">exit</button>
+  <%= button_to "exit", "/tournaments/#{ts_and_ps[:tournament].id}/participant_destroy", {method: :delete,class:"percent3"} %>
   <%else %>
-  <button type="button" class="btn btn-primary w-75">join</button>
+  
+  <%= button_to "join", "/tournaments/#{ts_and_ps[:tournament].id}/join", {method: :post,class:"percent2"} %>
   <%end%>
  </div>
  </div>
@@ -51,7 +58,7 @@ height: 600pt;
       <div class="container-fluid">
     <div class="row align-items-center">
     <div class="col-9">
-   <strong class="d-block text-gray-dark mozi2"> <%= tournament.name %></strong>
+    <strong class="d-block text-gray-dark mozi2"><%= link_to tournament.name ,"/tournaments/#{tournament.id}/", method: :get %></strong>
       </p></div>
       <div class="col-3">
     </div>
