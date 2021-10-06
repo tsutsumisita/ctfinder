@@ -8,6 +8,7 @@
 
 require 'securerandom'
 
+users_size = 70
 # users
 70.times do |n|
     User.create!(
@@ -32,23 +33,30 @@ end
 end
 
 # participants
+users = User.all.sample(10)
+tournaments = Tournament.all.sample(10)
 10.times do |n|
-    user = User.all.sample(1)[0]
     Participant.create!(
-        user: user,
-        name: user.name,
-        tournament: Tournament.all.sample(1)[0]
+        user: users[n],
+        name: users[n].name,
+        tournament: tournaments[n]
     )
 end
 
 # posts
+participants = Participant.includes(:tournaments).sample(10)
 10.times do |n|
-    participant = Participant.all.sample(1)[0]
     Post.create!(
-        participant: participant, 
-        tournament: participant.tournament,
+        participant: participants[n], 
+        tournament: participants[n].tournament,
         content: SecureRandom.alphanumeric(rand(1..140))
     )
+end
+
+ids = []
+while ids.size < 10 do
+    x = (rand(1..users_size+1), rand(1..users_size+1))
+    ids.push(x) unless ids.include?(x)
 end
 
 # likes
@@ -87,14 +95,40 @@ end
     )
 end
 
-# action
-10.times do |n|
-    post = Post.all.sample(1)[0]
-    participant = post.participant
-    user = participant.user
-    Action.create!(
-        participant: participant,
-	post: post,
-	user: user,
+# post_action
+post_all = Post.all
+posts = []
+ids = []
+post_all.each do |p|
+    unless ids.include?(p.participant.user.id)
+        posts.push(p)
+	ids.push(p.participant.user.id)
+	break ids.size == 5
+    end
+end
+
+posts.each do |p|
+    PostAction.create!(
+        post: p,
+	user: p.participant.user
+    )
+end
+
+# participant_action
+participant_all = Participant.all
+participants = []
+ids = []
+participant_all.each do |p|
+    unless ids.include?(p.user.id)
+        participants.push(p)
+	ids.push(p.user.id)
+	break ids.size == 5
+    end
+end
+
+participants.each do |p|
+    ParticipantAction.create!(
+        participant: p,
+	user: p.user
     )
 end

@@ -169,7 +169,7 @@
       <%= select_tag('reversing',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
-      <label> Crypt </label>
+      <label> Crypto </label>
       <%= select_tag('crypto',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
@@ -200,7 +200,7 @@
           <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
      <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4 class="timeline-title"><%= usr.name %></h4>
+              <h4 class="timeline-title"><a href = "/users/<%= usr.id %>/" style="text-decoration:none;color:black;"><%= usr.name %></a></h4>
               <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via Twitter</small></p>
             </div>
             <div class="timeline-body">
@@ -276,7 +276,7 @@
     <div class="timeline-panel">
     
         <div class="timeline-heading">
-              <h4 class="timeline-title"><%= usr.name %> </h4>
+              <h4 class="timeline-title"><a href = "/users/<%= usr.id %>/" style="text-decoration:none;color:black;"><%= usr.name %></a></h4>
               <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via Twitter</small></p>
         </div>
             <div class="timeline-body">

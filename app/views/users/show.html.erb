@@ -18,6 +18,42 @@
 </head>
 <body>
 
+<%# login-success flash message %>
+<% if flash[:success] %>
+  <div class="container">
+    <p class="alert alert-success h4">
+      <%= flash[:success] %>
+    </p>
+  </div>
+<% end %>
+
+<%# no-matching flash message %>
+<% if flash[:alert] %>
+  <div class="container">
+    <p class="alert alert-danger h4">
+      <%= flash[:alert] %>
+    </p>
+  </div>
+<% end %>
+
+<%# matching-complete flash message %>
+<% if flash[:matching_success] %>
+  <div class="container">
+    <p class="alert alert-success h4">
+      <%= flash[:matching_success] %>
+    </p>
+  </div>
+<% end %>
+
+<%# self-like flash message %>
+<% if flash[:danger] %>
+  <div class="container">
+    <p class="alert alert-danger h4">
+      <%= flash[:danger] %>
+    </p>
+  </div>
+<% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-xl-5" style="background-color:white;">
@@ -105,7 +141,7 @@
 <div class="container" class="bg-info d-flex align-items-center justify-content-center">
       <!--ボタン-->
       <div class="mx-auto" style="width: 400px;">
-      <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, class:"button-like"} %>
+      <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, liked_id: params[:id], class:"button-like"} %>
       </div>
 </div>
 
