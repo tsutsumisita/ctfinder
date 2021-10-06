@@ -15,10 +15,6 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:tournament_id])
     participant = current_user.participants.build(tournament: @tournament, name: current_user.name)
     if !@tournament.nil? && participant.save
-      # if ParticipantAction.where(user: current_user).exists?
-	    #   ParticipantAction.find_by(user: current_user).destroy
-      # end
-      # ParticipantAction.create!(participant: participant, user: current_user)
       if RecentAction.where(user: current_user).exists?
         RecentAction.find_by(user: current_user).destroy
       end

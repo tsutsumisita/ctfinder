@@ -7,10 +7,6 @@ class PostsController < ApplicationController
         @participant = @tournament.participants.find(user: current_user)
         @post = @participant.posts.build(post_params)
 	if @post.save
-	    # if PostAction.where(user: current_user).exists?
-	    #     PostAction.find_by(user: current_user).destroy
-	    # end
-	    # PostAction.create!(post: @post, user: current_user)
         if RecentAction.where(user: current_user).exists?
             RecentAction.find_by(user: current_user).destroy
         end
