@@ -30,11 +30,11 @@ class TournamentsController < ApplicationController
   
   def show
     @tournament = Tournament.find(params[:id])
-    redirect_to root_url if @tournament.nil? #, :alert 'この大会は存在しません'
+    redirect_to root_url if @tournament.nil?
     @participants = @tournament.participants
-    if current_user && Participant.exists?(user: current_user)
-      @participant = @participants.find(user: current_user)
-      @post = @participant.post.build(post_params)
+    @current_user_participant = Participant.find_by(user: current_user)
+    if current_user && !@current_user_participant.nil?
+      @post = @current_user_participant.post.build(post_params)
     end
     @posts = @tournament.post
   end

@@ -15,7 +15,7 @@ class PostsController < ApplicationController
             redirect_to root_url
         end
         flash.now[:success] = "投稿しました"
-        redirect_to tournament_path
+        redirect_to @tournament
     else
         flash[:danger] = "投稿に失敗しました"
     end

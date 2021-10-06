@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     recent_actions = RecentAction.includes(:user).where(user_id: user_ids).order(created_at: "desc")
     rau_ids = recent_actions.map{ |action| action.user.id }
     @user_and_actions = recent_actions.map{ |ra| { user: ra.user, action: generate_action(ra, Time.current) } } 
-    noaction_users = User.where(id: user_ids).where.not(id: rau_ids)
+    noaction_users = User.includes(:participants).where(id: user_ids).where.not(id: rau_ids)
     @user_and_actions += noaction_users.map{ |nau| { user: nau, action: nil } }
   end
 
