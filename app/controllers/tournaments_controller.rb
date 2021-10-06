@@ -11,13 +11,13 @@ class TournamentsController < ApplicationController
   end
 
   def join
-    @tournament = Tournament.find(params[:tournament_id])
+    @tournament = Tournament.find(params[:id])
     participant = current_user.participants.build(tournament: @tournament, name: current_user.name)
     if !@tournament.nil? && participant.save
       if RecentAction.where(user: current_user).exists?
         RecentAction.find_by(user: current_user).destroy
       end
-      unless RecentAction.new(action: 2, user: current_user, tourment: @tournament).save
+      unless RecentAction.new(action: 2, user: current_user, tournament: @tournament).save
         flash[:debug] = "failed to save recent action."
         redirect_to root_url
       end
@@ -33,7 +33,7 @@ class TournamentsController < ApplicationController
     @participants = @tournament.participants
     @current_user_participant = Participant.find_by(user: current_user)
     if current_user && !@current_user_participant.nil?
-      @post = @current_user_participant.post.build(post_params)
+      @post = @current_user_participant.post.build()
     end
     @posts = @tournament.post
   end
@@ -41,7 +41,7 @@ class TournamentsController < ApplicationController
   def participant_destroy
     participant = Participant.where(user: current_user, tournament_id: params[:id])
     if participant.exists?
-      participant.destroy
+      participant[0].destroy
     else
       flash[:danger] = "まだ参加していません"
     end
