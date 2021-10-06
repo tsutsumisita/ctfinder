@@ -31,7 +31,6 @@ class UsersController < ApplicationController
     if recent_action.action == 1
       content += " #{recent_action.tournament.name} に投稿"
     else
-      # assert
       content += " #{recent_action.tournament.name} にエントリー"
     end
     return content
