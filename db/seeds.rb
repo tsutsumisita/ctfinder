@@ -63,7 +63,7 @@ participants = Participant.all.sample(10)
         RecentAction.find_by(user: users[n]).destroy
     end
     RecentAction.create!(
-        action: 1,
+        action: 2,
         user: users[n],
         tournament: tournaments[n]
     )

@@ -10,11 +10,11 @@ class UsersController < ApplicationController
       @@searched_users = nil
     end
     user_ids = users.map{ |user| user.id }
-    recent_actions = RecentAction.includes(:user).where(user_id: user_ids)
-    rau_ids = recent_actions.map{ |action| action.id }
+    recent_actions = RecentAction.includes(:user).where(user_id: user_ids).order(created_at: "desc")
+    rau_ids = recent_actions.map{ |action| action.user.id }
     @user_and_actions = recent_actions.map{ |ra| { user: ra.user, action: generate_action(ra, Time.current) } } 
     noaction_users = User.where(id: user_ids).where.not(id: rau_ids)
-    @user_and_actions += noaction_users.map{ |nau| { user: nau, action: nil } } 
+    @user_and_actions += noaction_users.map{ |nau| { user: nau, action: nil } }
   end
 
   def generate_action(recent_action, current_time)
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     elsif time_dif >= 60
       content = " #{time_dif / 60} 分前に"
     else
-      content = " #{time_dif / 60} 分前に"
+      content = " #{time_dif} 秒前に"
     end
     if recent_action.action == 1
       content += " #{recent_action.tournament.name} に投稿"
