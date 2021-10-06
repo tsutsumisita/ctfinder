@@ -8,11 +8,11 @@
 
 require 'securerandom'
 
-users_size = 70
+users_size = 50
 # users
 50.times do |n|
     User.create!(
-        name: SecureRandom.alphanumeric(rand(10..20)), 
+        name: SecureRandom.alphanumeric(rand(3..10)), 
         email: SecureRandom.alphanumeric(rand(10..20)) + "@gmail.com", 
         password: "tintin#{n}", 
         web: rand(1..5),
@@ -52,108 +52,57 @@ tournaments = Tournament.all.sample(10)
 end
 
 # posts
-participants = Participant.all.sample(10)
+participants = Participant.includes(:tournament, :user).sample(10)
 10.times do |n|
     Post.create!(
         participant: participants[n], 
         tournament: participants[n].tournament,
         content: SecureRandom.alphanumeric(rand(1..140))
     )
-    if RecentAction.where(user: users[n]).exists?
-        RecentAction.find_by(user: users[n]).destroy
+    user = participants[n].user
+    if RecentAction.where(user: user).exists?
+        RecentAction.find_by(user: user).destroy
     end
     RecentAction.create!(
         action: 2,
-        user: users[n],
-        tournament: tournaments[n]
+        user: user,
+        tournament: participants[n].tournament
     )
 end
 
-# ids = []
-# while ids.size < 10 do
-#     x = (rand(1..users_size+1), rand(1..users_size+1))
-#     ids.push(x) unless ids.include?(x)
-# end
-
 # likes
+user_ids = []
+20.times do |n|
+    user_ids.push(n)
+end
+users = User.where(id: [user_ids])
 10.times do |n|
-    liker = User.all.sample(1)[0]
-    liked = User.all.sample(1)[0]
-    while liker == liked do
-        liked = User.all.sample(1)[0]
-    end
     Like.create!(
-        liker: liker,
-        liked: liked
+        liker: users[n+1],
+        liked: users[n+2]
+    )
+end
+10.times do |n|
+    Like.create!(
+        liker: users[n+2],
+        liked: users[n+1]
     )
 end
 
 # matching
 10.times do |n|
-    user1 = User.all.sample(1)[0]
-    user2 = User.all.sample(1)[0]
-    while user1 == user2 do
-        user2 = User.all.sample(1)[0]
-    end
     Matching.create!(
-        user1: user1,
-        user2: user2
+        user1: users[n+1],
+        user2: users[n+2]
     )
 end
 
 # direct_message
+matching = Matching.all.sample(10)
 10.times do |n|
-    matching = Matching.all.sample(1)[0]
     DirectMessage.create!(
-        matching: matching,
-        sender: [matching.user1, matching.user2].sample(1)[0],
+        matching: matching[n],
+        sender: [matching[n].user1, matching[n].user2].sample(1)[0],
         content: SecureRandom.alphanumeric(rand(1..140))
-    )
-end
-
-# post_action
-post_all = Post.all
-posts = []
-ids = []
-post_all.each do |p|
-    unless ids.include?(p.participant.user.id)
-        posts.push(p)
-        ids.push(p.participant.user.id)
-        break ids.size == 5
-    end
-end
-
-posts.each do |p|
-    user = p.participant.user
-    PostAction.create!(
-        post: p,
-	    user: user
-    )
-    if RecentAction.where(user: user).exists?
-        RecentAction.find_by(user: user).destroy
-    end
-    RecentAction.create!(
-        action: 1,
-        user: user,
-        tournament: p.tournament
-    )
-end
-
-# participant_action
-participant_all = Participant.all
-participants = []
-ids = []
-participant_all.each do |p|
-    unless ids.include?(p.user.id)
-        participants.push(p)
-	ids.push(p.user.id)
-	break ids.size == 5
-    end
-end
-
-participants.each do |p|
-    ParticipantAction.create!(
-        participant: p,
-	    user: p.user
     )
 end
