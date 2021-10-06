@@ -12,6 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2021_10_05_064129) do
 
+  create_table "actions", force: :cascade do |t|
+    t.integer "participant_id"
+    t.integer "post_id"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["participant_id"], name: "index_actions_on_participant_id"
+    t.index ["post_id"], name: "index_actions_on_post_id"
+    t.index ["user_id"], name: "index_actions_on_user_id"
+  end
+
   create_table "direct_messages", force: :cascade do |t|
     t.integer "matching_id", null: false
     t.text "content"
@@ -100,6 +111,9 @@ ActiveRecord::Schema.define(version: 2021_10_05_064129) do
     t.string "remember_digest"
   end
 
+  add_foreign_key "actions", "participants"
+  add_foreign_key "actions", "posts"
+  add_foreign_key "actions", "users"
   add_foreign_key "direct_messages", "matchings"
   add_foreign_key "direct_messages", "users", column: "sender_id"
   add_foreign_key "likes", "users", column: "liked_id"

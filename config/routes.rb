@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   
   post '/users/:id/direct_messages', to: 'direct_messages#create'
 
-  get '/users/search', to: 'users#index'
+  
  
 end

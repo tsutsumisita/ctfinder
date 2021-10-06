@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
   
+  @@searched_users = nil
+
   def index
-    @users = User.all
+    if @@searched_users.nil?
+      @users = User.all
+    else
+      @users = @@searched_users
+      @@searched_users = nil
+    end
   end
 
  
@@ -14,7 +21,8 @@ class UsersController < ApplicationController
     misc = params[:misc].to_i
     begin
       @users = User.where("web > ?", web - 1).where("crypto > ?", crypto - 1).where("reversing > ?", reversing - 1).where("pwn > ?", pwn - 1).where("misc > ?", misc - 1)
-      render 'index'
+      @@searched_users = @users
+      redirect_to users_url
     rescue
       flash.now[:danger] = "検索に失敗しました"
       render 'index'
