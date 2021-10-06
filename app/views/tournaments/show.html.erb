@@ -21,6 +21,15 @@
         overflow-y: auto;
     height: 600pt; 
     }
+    .mozi2 {
+        font-size: 1.3em;
+    }
+    .mozi {
+        font-size: 1.2em;
+    }
+    .percent {
+  width: 100%;
+}
     img {
     border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
     width:  100%;       /* ※縦横を同値に */
@@ -40,28 +49,30 @@
  <meta charset="utf-8">
  </head>
  <body>
- <h1><%=@tournament.name  %></h1>
+  <h1><%=@tournament.name  %></h1>
  <div class="container-fluid">
  <div class="row">
  <div class="col-4">
  <div class="container-fluid example2">
- <h6 class="border-bottom border-gray pb-2 mb-0">members</h6>
+ <h6 class="border-bottom border-gray pb-2 mb-0">participants</h6>
   <div class="row">
-  <% for num in 1..20 do %>
+  <% @participants.each do |p| %>
     <div class="col-4">
     <div class="card">
-    <p>Card title</p>
+    <%= p.name %>
     <img src="https://placehold.jp/150x150.png" alt="Card image cap">
     </div></div>
   <% end %>
   </div>
 </div>
 <div class="example3">
+<% if @post!= nil then %>
 <%= form_for(@post, url: {controller: 'posts', action: 'create' } ) do |f| %>
   <div class="field form-group">
         <%= f.text_area :content,rows: 7,style: 'width:100%;', placeholder: "Compose new micropost..." %>
   </div>
     <%= f.submit "post", class: "btn btn-primary" %>
+<% end %>
 <% end %>
 </div>
   </div>
@@ -69,12 +80,12 @@
   <div class="example4">
   <div class="my-3 p-3 bg-white rounded shadow-sm">
   <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-  <% for num in 1..20 do %>
+  <% @posts.each do |post| %>
   <div class="media text-muted pt-3">
-    <img2 data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-      <strong class="d-block text-gray-dark">@username</strong>
-      Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+    <img2 data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded percent">
+    <p class="media-body pb-3 mb-0 small lh-125 border-bottom mozi border-gray style: 'width:100%;'">
+      <strong class="d-block text-gray-dark mozi2"><%= post.participant.user.name %></strong>
+      <%= post.content %>
     </p>
   </div>
   <%end %>
