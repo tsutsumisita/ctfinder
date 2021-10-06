@@ -1,5 +1,15 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<%= stylesheet_link_tag "direct_messages", :media => "all" %>
+<head>
+    <title>CtFinder</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag "direct_messages", :media => "all" %>
+    <style>
+    .box {
+        width: px;                /* 横幅を200pxに指定 */
+        height: 1000px;               /* 縦幅を200pxに指定 */     /* わかりやすくボーダーを引く */
+        overflow-y: scroll;          /* 縦方向にスクロール可能にする */
+    }
+    </style>
+</head>
 <div class="container bootstrap snippets bootdey">
     <div class="row">        
         <!--=========================================================-->
@@ -21,57 +31,61 @@
                     </p>
                 </div>
             <% end %>
-            <div class="chat-message">
-                <ul class="chat">
-                    <% @dms.each do |dm| %>
-                        <% if params[:id].to_i == dm.sender_id %>
-                            <li class="left clearfix">
-                                <span class="chat-img pull-left">
-                                    <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-                                </span>
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <strong class="primary-font">
-                                            <% if User.find(Matching.find(dm.matching_id).user1_id) == dm.sender_id %>
-                                                <%= User.find(Matching.find(dm.matching_id).user1_id).name %>
-                                            <% else %>
-                                                <%= User.find(Matching.find(dm.matching_id).user2_id).name %>
-                                            <% end %>
-                                        </strong>
-                                        <small class="pull-right text-muted"><i class="fa fa-clock-o"></i><%= dm.created_at %></small>
+            <div class="container-fluid box">
+                <div class="chat-message">
+                    <ul class="chat">
+                        <% @dms.each do |dm| %>
+                            <% if params[:id].to_i == dm.sender_id %>
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <% user_img_path = "/user" + (params[:id].to_i % 10).to_s + ".png" %>
+                                        <p class="trim-image-to-circle"><%= image_tag user_img_path, class: "d-block mx-auto" %></p>
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">
+                                                <% if User.find(Matching.find(dm.matching_id).user1_id) == dm.sender_id %>
+                                                    <%= User.find(Matching.find(dm.matching_id).user1_id).name %>
+                                                <% else %>
+                                                    <%= User.find(Matching.find(dm.matching_id).user2_id).name %>
+                                                <% end %>
+                                            </strong>
+                                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i><%= dm.created_at %></small>
+                                        </div>
+                                        <p>
+                                            <%= dm.content %>
+                                        </p>
                                     </div>
-                                    <p>
-                                        <%= dm.content %>
-                                    </p>
-                                </div>
-                            </li>
-                        <% else %>
-                            <li class="right clearfix">
-                                <span class="chat-img pull-right">
-                                    <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-                                </span>
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <strong class="primary-font"><%= my_name = User.find(dm.sender_id).name %></strong>
-                                        <small class="pull-right text-muted"><i class="fa fa-clock-o"></i><%= dm.created_at %></small>
+                                </li>
+                            <% else %>
+                                <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <% user_img_path = "/user" + (current_user.id % 10).to_s + ".png" %>
+                                        <p class="trim-image-to-circle"><%= image_tag user_img_path, class: "d-block mx-auto" %></p>
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font"><%= my_name = User.find(dm.sender_id).name %></strong>
+                                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i><%= dm.created_at %></small>
+                                        </div>
+                                        <p>
+                                            <%= dm.content %>
+                                        </p>
                                     </div>
-                                    <p>
-                                        <%= dm.content %>
-                                    </p>
-                                </div>
-                            </li>
-                        <% end %>                                            
-                    <% end %>
-                </ul>
+                                </li>
+                            <% end %>                                            
+                        <% end %>
+                    </ul>
+                </div>
             </div>
             <%= form_for @direct_message, url: { controller: "direct_messages", action: "create" } do |f| %>
-                 <div class="chat-box bg-white">
+                <div class="chat-box bg-white">
                     <div class="input-group">
-                        <%= f.text_field(:content, placeholder:"Type your message here", class:"form-control border no-shadow no-rounded") %>
+                        <%= f.text_field(:content, placeholder:"Type your message here", class:"form-control form-control-lg border no-shadow no-rounded") %>
                         <%= f.submit("Send", class: "btn btn-success no-rounded") %>
                     </div>
                 </div>
-            <% end %>     
+            <% end %>    
 		</div>        
 	</div>
 </div>
