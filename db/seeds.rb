@@ -44,7 +44,7 @@ tournaments = Tournament.all.sample(10)
 end
 
 # posts
-participants = Participant.includes(:tournaments).sample(10)
+participants = Participant.all.sample(10)
 10.times do |n|
     Post.create!(
         participant: participants[n], 
@@ -53,11 +53,11 @@ participants = Participant.includes(:tournaments).sample(10)
     )
 end
 
-ids = []
-while ids.size < 10 do
-    x = (rand(1..users_size+1), rand(1..users_size+1))
-    ids.push(x) unless ids.include?(x)
-end
+# ids = []
+# while ids.size < 10 do
+#     x = (rand(1..users_size+1), rand(1..users_size+1))
+#     ids.push(x) unless ids.include?(x)
+# end
 
 # likes
 10.times do |n|
