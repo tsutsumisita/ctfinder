@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   
+  @@searched_users = nil
+
   def index
     if @@searched_users.nil?
       users = User.all
@@ -58,10 +60,11 @@ class UsersController < ApplicationController
 
   def edit
   end
-
+  
   def show
     @user = User.find(params[:id])
   end
+  
 
   def create
     user = User.new(user_params)

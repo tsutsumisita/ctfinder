@@ -7,7 +7,7 @@ class TournamentsController < ApplicationController
     # TODO: only future tournament
     if current_user
       participant_tournament_ids = current_user.participants.map { |h| h[:tournament_id] }
-      @tournaments.map { |t| t[:participant] = true if participant_tournament_ids.include?(t.id) }
+      @ts_and_ps = @tournaments.map { |t| if participant_tournament_ids.include?(t.id) then { tournament: t, join: true } else { tournament: t, join: false } end }
     end
   end
 
