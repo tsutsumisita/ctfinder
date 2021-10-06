@@ -25,7 +25,7 @@ users_size = 50
 end
 
 # tournaments
-10.times do |n|
+20.times do |n|
     Tournament.create!(
         name: SecureRandom.alphanumeric(rand(10..20)), 
         date: Time.parse('2020-01-01 12:00:00')
@@ -33,22 +33,25 @@ end
 end
 
 # participants
-users = User.all.sample(10)
-tournaments = Tournament.all.sample(10)
-10.times do |n|
+users = User.all.sample(20)
+tournaments = Tournament.all.sample(20)
+20.times do |n|
     Participant.create!(
         user: users[n],
         name: users[n].name,
         tournament: tournaments[n]
     )
-    if RecentAction.where(user: users[n]).exists?
-        RecentAction.find_by(user: users[n]).destroy
+    if n < 10
+        if RecentAction.where(user: users[n]).exists?
+            RecentAction.find_by(user: users[n]).destroy
+        end
+        RecentAction.create!(
+            action: 2,
+            user: users[n],
+            tournament: tournaments[n]
+        )
+
     end
-    RecentAction.create!(
-        action: 2,
-        user: users[n],
-        tournament: tournaments[n]
-    )
 end
 
 # posts
@@ -64,7 +67,7 @@ participants = Participant.includes(:tournament, :user).sample(10)
         RecentAction.find_by(user: user).destroy
     end
     RecentAction.create!(
-        action: 2,
+        action: 1,
         user: user,
         tournament: participants[n].tournament
     )
