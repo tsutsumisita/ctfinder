@@ -1,10 +1,9 @@
 class TournamentsController < ApplicationController
 
-  before_action :logged_in_user, only: [:join]
+  before_action :logged_in_user, only: [:join, :participant_destroy]
 
   def index
-    @tournaments = Tournament.all
-    # TODO: only future tournament
+    @tournaments = Tournament.includes(:participants, :post)
     if current_user
       participant_tournament_ids = current_user.participants.map { |h| h[:tournament_id] }
       @ts_and_ps = @tournaments.map { |t| if participant_tournament_ids.include?(t.id) then { tournament: t, join: true } else { tournament: t, join: false } end }
@@ -22,7 +21,7 @@ class TournamentsController < ApplicationController
         flash[:debug] = "failed to save recent action."
         redirect_to root_url
       end
-      render :index
+      redirect_to tournaments_url
     else
       flash[:danger] = "参加に失敗しました"
     end
@@ -37,6 +36,16 @@ class TournamentsController < ApplicationController
       @post = @current_user_participant.post.build(post_params)
     end
     @posts = @tournament.post
+  end
+
+  def participant_destroy
+    participant = Participant.where(user: current_user, tournament_id: params[:id])
+    if participant.exists?
+      participant.destroy
+    else
+      flash[:danger] = "まだ参加していません"
+    end
+    redirect_to tournaments_url
   end
 
 end

@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   post    '/tournaments/:id/post',  to: 'posts#create', id: /\d+/
   post  '/tournaments/join',  to: 'tournaments#join'
 
+  # participants
+  delete  '/tournaments/:id/participant_destroy/'  , to: 'tournaments#participant_destroy', id: /\d+/
+
 end
