@@ -47,6 +47,13 @@
  <meta charset="utf-8">
  </head>
  <body>
+  <% flash.each do |_, message| %>
+      <div class="container">
+        <p class="alert alert-success h4">
+            <%= message %>
+        </p>
+      </div>
+  <% end %>
   <h1><%= @tournament.name  %></h1>
  <div class="container-fluid">
  <div class="row">

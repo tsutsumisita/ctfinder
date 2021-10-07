@@ -16,6 +16,7 @@ class PostsController < ApplicationController
                 flash[:debug] = "failed to recent action."
                 redirect_to root_url
             end
+            flash[:success] = "#{@tournament.name}に投稿しました"
         else
             flash[:danger] = "投稿に失敗しました"
         end
