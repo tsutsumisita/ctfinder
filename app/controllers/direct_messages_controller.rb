@@ -4,6 +4,14 @@ class DirectMessagesController < ApplicationController
   def show
     @direct_message = DirectMessage.new()
     @dms = DirectMessage.where(matching: @matching).order(created_at: :asc)
+    unless @matching.nil?
+      @me = if current_user == @matching.user1 then current_user else @matching.user2 end
+      @you = if current_user == @matching.user1 then @matching.user2 else @matching.user1 end
+        p @matching
+        p @me
+        p @you 
+        p "ああああああああああああああああああああああああああああああああああああああああああああああああ"
+    end
   end
 
   def create

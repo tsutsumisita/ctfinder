@@ -87,7 +87,7 @@
   top: 16px;
   left: 50%;
   margin-left: -25px;
-  background-color: #999999;
+  background-color: #ffff;
   z-index: 100;
   border-top-right-radius: 50%;
   border-top-left-radius: 50%;
@@ -113,7 +113,7 @@
   right: auto;
 }
 
-.timeline-badge.primary {
+/* .timeline-badge.primary {
   background-color: #2e6da4 !important;
 }
 
@@ -131,7 +131,7 @@
 
 .timeline-badge.info {
   background-color: #5bc0de !important;
-}
+} */
 
 .timeline-title {
   margin-top: 0;
@@ -146,7 +146,13 @@
 .timeline-body > p + p {
   margin-top: 5px;
 }
-
+.chat-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50em;
+    -moz-border-radius: 50em;
+    -webkit-border-radius: 50em;
+  }
 </style>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"
@@ -162,23 +168,29 @@
   <div class="row">
     <div class="col-md-3">
       <label> Pwn </label>
-      <%= select_tag('pwn',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+       <% if @skills_query.nil? %>
+          <% skills = [1]*5 %>
+      <% else %>
+          <%skills = [@skills_query[:pwn], @skills_query[:reversing],@skills_query[:crypto],@skills_query[:web],@skills_query[:misc]] %>
+      <% end %>
+
+      <%= select_tag('pwn',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[0]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
       <label> Reversing </label>
-      <%= select_tag('reversing',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+      <%= select_tag('reversing',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[1]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
       <label> Crypto </label>
-      <%= select_tag('crypto',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+      <%= select_tag('crypto',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[2]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
       <label> Web </label>
-      <%= select_tag('web',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+      <%= select_tag('web',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[3]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
       <label> Misc </label>
-      <%= select_tag('misc',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+      <%= select_tag('misc',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[4]),class:"custom-select d-block w-100") %>
     </div>
   </div>
   <div class=" text-center">
@@ -196,7 +208,9 @@
   <% if x  < 20 %>
     <% if x % 2 == 0 %>
       <li>
-          <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+          <div class="timeline-badge">
+            <i><%= image_tag usr[:user].image, class: "chat-img" %></i>
+          </div>
      <div class="timeline-panel">
             <div class="timeline-heading">
               <h4 class="timeline-title"><%= link_to "#{usr[:user].name}", user_path(usr[:user]), :style=>"text-decoration:none;color:black;" %></h4>
@@ -271,7 +285,9 @@
     
   <li class="timeline-inverted">
      
-        <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+         <div class="timeline-badge">
+            <i><%= image_tag usr[:user].image, class: "chat-img" %></i>
+          </div>
     <div class="timeline-panel">
     
         <div class="timeline-heading">
@@ -351,6 +367,8 @@
   
 <% end %> 
 </ul>
+
+<%= paginate @user_and_actions , theme:'twitter-bootstrap-4'%>
 
 </div>
 

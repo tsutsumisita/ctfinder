@@ -43,13 +43,7 @@
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
-                                            <strong class="primary-font">
-                                                <% if User.find(Matching.find(dm.matching_id).user1_id) == dm.sender_id %>
-                                                    <%= User.find(Matching.find(dm.matching_id).user1_id).name %>
-                                                <% else %>
-                                                    <%= User.find(Matching.find(dm.matching_id).user2_id).name %>
-                                                <% end %>
-                                            </strong>
+                                            <strong class="primary-font"><%= @you.name %></strong>
                                             <small class="pull-right text-muted"><i class="fa fa-clock-o"></i><%= dm.created_at %></small>
                                         </div>
                                         <p>
@@ -60,12 +54,11 @@
                             <% else %>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                        <% user_img_path = "/user" + (current_user.id % 10).to_s + ".png" %>
-                                        <p class="trim-image-to-circle"><%= image_tag user_img_path, class: "d-block mx-auto" %></p>
+                                        <p class="trim-image-to-circle"><%= image_tag @me.image, class: "d-block mx-auto" %></p>
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
-                                            <strong class="primary-font"><%= my_name = User.find(dm.sender_id).name %></strong>
+                                            <strong class="primary-font"><%= @me.name %></strong>
                                             <small class="pull-right text-muted"><i class="fa fa-clock-o"></i><%= dm.created_at %></small>
                                         </div>
                                         <p>
