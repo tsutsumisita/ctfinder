@@ -64,8 +64,7 @@
           <% if @user.image.attached? %>
             <%= image_tag @user.image, class: "trim-image-to-circle" %>
           <% else %>
-            <% user_img_path = "/user" + (@user.id % 10).to_s + ".png" %>
-            <%= image_tag user_img_path, class: "trim-image-to-circle" %>
+            <%= image_tag '/user0.png', class: "trim-image-to-circle" %>
           <% end %>
         </div>
 
