@@ -76,7 +76,7 @@ class UsersController < ApplicationController
       login user
       flash[:success] = "CtFinderへようこそ！"
     else
-      flash.now[:danger] = "アカウント作成に失敗しました"
+      flash[:danger] = "アカウント作成に失敗しました"
     end
     redirect_to root_url
   end
