@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   @@searched_users = nil
+  @@skills_query = nil
 
   def index
     if @@searched_users.nil?
@@ -15,6 +16,9 @@ class UsersController < ApplicationController
     @user_and_actions = recent_actions.map{ |ra| { user: ra.user, action: generate_action(ra, Time.current) } } 
     noaction_users = User.includes(:participants).where(id: user_ids).where.not(id: rau_ids)
     @user_and_actions += noaction_users.map{ |nau| { user: nau, action: nil } }
+    @user_and_actions = Kaminari.paginate_array(@user_and_actions).page(params[:page]).per(10)
+    @skills_query = @@skills_query
+    @@skills_query = nil
   end
 
   def generate_action(recent_action, current_time)
@@ -46,6 +50,7 @@ class UsersController < ApplicationController
       users = User.where("web > ?", web - 1).where("crypto > ?", crypto - 1).where("reversing > ?", reversing - 1).where("pwn > ?", pwn - 1).where("misc > ?", misc - 1)
       @@searched_users = users
       @user_and_actions = users.map { |user| { user: user, action: nil } }
+      @@skills_query = {:web => web, :crypto => crypto, :reversing => reversing, :pwn => pwn, :misc => misc }
       redirect_to users_url
     rescue
       flash.now[:danger] = "検索に失敗しました"

@@ -162,23 +162,29 @@
   <div class="row">
     <div class="col-md-3">
       <label> Pwn </label>
-      <%= select_tag('pwn',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+       <% if @skills_query.nil? %>
+          <% skills = [1]*5 %>
+      <% else %>
+          <%skills = [@skills_query[:pwn], @skills_query[:reversing],@skills_query[:crypto],@skills_query[:web],@skills_query[:misc]] %>
+      <% end %>
+
+      <%= select_tag('pwn',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[0]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
       <label> Reversing </label>
-      <%= select_tag('reversing',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+      <%= select_tag('reversing',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[1]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
       <label> Crypto </label>
-      <%= select_tag('crypto',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+      <%= select_tag('crypto',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[2]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
       <label> Web </label>
-      <%= select_tag('web',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+      <%= select_tag('web',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[3]),class:"custom-select d-block w-100") %>
     </div>
     <div class="col-md-3">
       <label> Misc </label>
-      <%= select_tag('misc',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']]),class:"custom-select d-block w-100") %>
+      <%= select_tag('misc',options_for_select([['1','1'],['2','2'],['3','3'],['4','4'],['5','5']],:selected => skills[4]),class:"custom-select d-block w-100") %>
     </div>
   </div>
   <div class=" text-center">
@@ -351,6 +357,8 @@
   
 <% end %> 
 </ul>
+
+<%= paginate @user_and_actions , theme:'twitter-bootstrap-4'%>
 
 </div>
 
