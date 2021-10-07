@@ -22,6 +22,11 @@
     .mozi2 {
         font-size: 1.3em;
     }
+.mozi3{
+    overflow:hidden;
+    text-overflow: ellipsis;
+white-space: nowrap;
+}
     .mozi {
         font-size: 1.2em;
     }
@@ -64,8 +69,11 @@
   <% @participants.each do |p| %>
     <div class="col-4">
     <div class="card">
+    <p class="mozi3">
     <%= p.name %>
-    <img src="https://placehold.jp/150x150.png" alt="Card image cap" class="aligncenter">
+    </p>
+    <% user_img_path = "/user" + (p.id % 10).to_s + ".png" %>
+    <%= image_tag user_img_path, class: "align-center" %>
     </div></div>
   <% end %>
   </div>
@@ -102,8 +110,6 @@
 </div>
   </div>
   </div>
-  </div>
-  <div class="col-8">
   </div>
  </body>
 </html>
