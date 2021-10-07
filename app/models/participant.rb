@@ -12,7 +12,6 @@ class Participant < ApplicationRecord
     belongs_to :user
     belongs_to :tournament
     has_many :post, dependent: :destroy 
-    has_many :participant_action, dependent: :destroy
 
     validates_with NameValidator
 end

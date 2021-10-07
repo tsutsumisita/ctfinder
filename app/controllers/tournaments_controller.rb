@@ -39,9 +39,24 @@ class TournamentsController < ApplicationController
   end
 
   def participant_destroy
-    participant = Participant.where(user: current_user, tournament_id: params[:id])
-    if participant.exists?
-      participant[0].destroy
+    current_user_participants = Participant.includes(:user).where(user: current_user)
+    target_participant = current_user_participants.find_by(tournament_id: params[:id])
+    unless target_participant.nil?
+      target_participant.destroy
+      begin
+        RecentAction.find_by(user: current_user).destroy
+      rescue => e
+        p e.backtrace
+        exit!
+      end
+      recent_actions = Post.where(participant: current_user_participants) + Participant.where(user: current_user)
+      recent_action = recent_actions.sort_by{|ra| ra[:created_at] }.last
+      RecentAction.create!(
+        user: current_user,
+        tournament: recent_action.tournament, 
+        action: if recent_action.class == Post then 1 else 2 end,
+        created_at: recent_action.created_at
+      ) unless recent_action.nil?
     else
       flash[:danger] = "まだ参加していません"
     end

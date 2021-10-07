@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_06_145156) do
+ActiveRecord::Schema.define(version: 2021_10_06_060419) do
 
   create_table "direct_messages", force: :cascade do |t|
     t.integer "matching_id", null: false
