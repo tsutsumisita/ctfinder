@@ -16,7 +16,7 @@ class LikesController < ApplicationController
         else
             flash[:danger] = "Likeに失敗しました"
         end
-        redirect_to "/users/#{params[:liked_id]}/"
+        redirect_to liked_user
     end
 
 end

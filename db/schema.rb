@@ -40,15 +40,6 @@ ActiveRecord::Schema.define(version: 2021_10_06_060419) do
     t.index ["user2_id"], name: "index_matchings_on_user2_id"
   end
 
-  create_table "participant_actions", force: :cascade do |t|
-    t.integer "participant_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["participant_id"], name: "index_participant_actions_on_participant_id"
-    t.index ["user_id"], name: "index_participant_actions_on_user_id"
-  end
-
   create_table "participants", force: :cascade do |t|
     t.integer "user_id"
     t.integer "tournament_id"
@@ -57,15 +48,6 @@ ActiveRecord::Schema.define(version: 2021_10_06_060419) do
     t.string "name"
     t.index ["tournament_id"], name: "index_participants_on_tournament_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
-  end
-
-  create_table "post_actions", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_post_actions_on_post_id"
-    t.index ["user_id"], name: "index_post_actions_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -116,12 +98,8 @@ ActiveRecord::Schema.define(version: 2021_10_06_060419) do
   add_foreign_key "likes", "users", column: "liker_id"
   add_foreign_key "matchings", "users", column: "user1_id"
   add_foreign_key "matchings", "users", column: "user2_id"
-  add_foreign_key "participant_actions", "participants"
-  add_foreign_key "participant_actions", "users"
   add_foreign_key "participants", "tournaments"
   add_foreign_key "participants", "users"
-  add_foreign_key "post_actions", "posts"
-  add_foreign_key "post_actions", "users"
   add_foreign_key "posts", "participants"
   add_foreign_key "posts", "tournaments"
   add_foreign_key "recent_actions", "tournaments"

@@ -61,11 +61,12 @@
         <div class="text-center">
 
           <!--写真-->
-          <p class="trim-image-to-circle"><img class="d-block mx-auto" src="/assets/koji.png" alt=""></p>
+          <% user_img_path = "/user" + (@user.id % 10).to_s + ".png" %>
+          <p class="trim-image-to-circle"><%= image_tag user_img_path, class: "d-block mx-auto" %></p>
         </div>
 
           <!--名前-->
-          <p class="text-center"><font size="7"><%= @user.name %></font></p>
+          <p class="text-center text-break"><font size="7"><%= @user.name %></font></p>
 
           <!--自己紹介-->
           <div >
@@ -120,7 +121,7 @@
                 },
                 // ポイントラベル
                 pointLabels: {
-                  fontSize: 30,
+                  font: {size: 25},
                   color: 'black',
                   backdropColor: 'white',
                   backdropPadding: 0,
@@ -138,12 +139,14 @@
     </div>
   </div>
 </div>
-<div class="container" class="bg-info d-flex align-items-center justify-content-center">
-      <!--ボタン-->
-      <div class="mx-auto" style="width: 400px;">
-      <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, liked_id: params[:id], class:"button-like"} %>
-      </div>
-</div>
+<% if current_user.id != @user.id %>
+  <div class="container" class="bg-info d-flex align-items-center justify-content-center">
+        <!--ボタン-->
+        <div class="mx-auto" style="width: 400px;">
+        <%= button_to "Like!", "/users/#{@user.id}/like", {method: :post, liked_id: params[:id], class:"button-like"} %>
+        </div>
+  </div>
+<% end %>
 
 <% if matching_find %>
   <div class="container" class="bg-info d-flex align-items-center justify-content-center">

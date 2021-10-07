@@ -18,14 +18,12 @@ class User < ApplicationRecord
     has_many :user1_matching, class_name: "Matching", foreign_key: "user1_id", dependent: :destroy
     has_many :user2_matching, class_name: "Matching", foreign_key: "user2_id", dependent: :destroy
     has_many :sender_direct_message, class_name: "DirectMessage", foreign_key: "sender_id", dependent: :destroy
-    has_many :post_action, dependent: :destroy
-    has_many :participant_action, dependent: :destroy
     has_many :recent_action, dependent: :destroy
     
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     
     # column validation
-    validates :name, presence:true, uniqueness: true
+    validates :name, presence:true, uniqueness: true, length: { minimum: 3, maximum: 10 }
     validates :email, presence:true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
         # for password authenticate
     has_secure_password
