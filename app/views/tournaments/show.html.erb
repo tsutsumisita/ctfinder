@@ -36,7 +36,8 @@ white-space: nowrap;
 .aligncenter {
     border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
     width:  100%;       /* ※縦横を同値に */
-    height: 100%;       /* ※縦横を同値に */}
+    height: 5em;       /* ※縦横を同値に */
+}
     .item {
       /* 横スクロール用 */
       display: inline-block;
@@ -72,8 +73,11 @@ white-space: nowrap;
     <p class="mozi3">
     <%= p.name %>
     </p>
-    <% user_img_path = "/user" + (p.id % 10).to_s + ".png" %>
-    <%= image_tag user_img_path, class: "align-center" %>
+    <% if p.user.image.attached? %>
+            <%= image_tag p.user.image, class: "aligncenter" %>
+          <% else %>
+            <%= iamge_tag 'user0.png', class: "aligncenter" %>
+          <% end %>
     </div></div>
   <% end %>
   </div>
@@ -82,7 +86,7 @@ white-space: nowrap;
 <% unless @post.nil? then %>
 <%= form_for(@post, url: {controller: 'posts', action: 'create' } ) do |f| %>
   <div class="field form-group">
-        <%= f.text_area :content,rows: 7,style: 'width:100%;', placeholder: "Compose new micropost..." %>
+        <%= f.text_area :content,rows: 7,style: 'width:100%;', placeholder: "投稿内容を入力してください。" %>
   </div>
     <%= f.submit "post", class: "btn btn-primary" %>
 <% end %>
