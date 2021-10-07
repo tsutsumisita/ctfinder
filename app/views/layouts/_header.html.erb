@@ -6,7 +6,7 @@
 </style>
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 ">
-     <a class="navbar-brand" href="/">Ctfinder</a>
+     <%= link_to "CtFinder", root_url, class: "navbar-brand", data: { "turbolinks" => false } %>
      <!--
      <button class="navbar-toggler" type="button"  data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="true" >
         <span class="navbar-toggler-icon"></span>
@@ -20,10 +20,10 @@
                    <ul class="dropdown-menu dropdown-menu-right">
                    <% if logged_in? %>
                     <li>
-                        <a class="dropdown-item" href="/users/<%= current_user.id %>/">My page</a>
+                        <%= link_to "My page", user_path(current_user.id), data: { "turbolinks" => false }, class: "dropdown-item" %>
                     </li>
                     <li>
-                        <a class="dropdown-item" rel="nofollow" data-method="delete" href="/logout">Sign out</a>
+                        <%= link_to "Sign out", logout_url, data: { confirm: "ログアウトします。よろしいですか？" }, class: "dropdown-item", method: "delete" %>
                     </li>
                     </ul>
                     <% else %>   

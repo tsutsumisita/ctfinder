@@ -69,9 +69,10 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       login user
-      redirect_to root_url, success: "CtFinderへようこそ！"
+      flash[:success] = "CtFinderへようこそ！"
+      redirect_to root_url
     else
-      flash.now[:danger] = "ユーザーの保存に失敗しました"
+      flash.now[:danger] = "アカウント作成に失敗しました"
       render 'new' 
     end
   end

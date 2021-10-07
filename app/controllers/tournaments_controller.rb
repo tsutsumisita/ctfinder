@@ -31,9 +31,9 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
     redirect_to root_url if @tournament.nil?
     @participants = @tournament.participants
-    @current_user_participant = Participant.find_by(user: current_user)
-    if current_user && !@current_user_participant.nil?
-      @post = @current_user_participant.post.build()
+    participant_to_this = Participant.find_by(user: current_user, tournament: @tournament)
+    if current_user && !participant_to_this.nil?
+      @post = participant_to_this.post.build()
     end
     @posts = @tournament.post
   end
