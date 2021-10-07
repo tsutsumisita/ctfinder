@@ -22,6 +22,11 @@
     .mozi2 {
         font-size: 1.3em;
     }
+.mozi3{
+    overflow:hidden;
+    text-overflow: ellipsis;
+white-space: nowrap;
+}
     .mozi {
         font-size: 1.2em;
     }
@@ -31,7 +36,8 @@
 .aligncenter {
     border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
     width:  100%;       /* ※縦横を同値に */
-    height: 100%;       /* ※縦横を同値に */}
+    height: 5em;       /* ※縦横を同値に */
+}
     .item {
       /* 横スクロール用 */
       display: inline-block;
@@ -64,8 +70,14 @@
   <% @participants.each do |p| %>
     <div class="col-4">
     <div class="card">
+    <p class="mozi3">
     <%= p.name %>
-    <img src="https://placehold.jp/150x150.png" alt="Card image cap" class="aligncenter">
+    </p>
+    <% if p.user.image.attached? %>
+            <%= image_tag p.user.image, class: "aligncenter" %>
+          <% else %>
+            <%= image_tag 'user0.png', class: "aligncenter" %>
+          <% end %>
     </div></div>
   <% end %>
   </div>
@@ -74,7 +86,7 @@
 <% unless @post.nil? then %>
 <%= form_for(@post, url: {controller: 'posts', action: 'create' } ) do |f| %>
   <div class="field form-group">
-        <%= f.text_area :content,rows: 7,style: 'width:100%;', placeholder: "Compose new micropost..." %>
+        <%= f.text_area :content,rows: 7,style: 'width:100%;', placeholder: "投稿内容を入力してください。" %>
   </div>
     <%= f.submit "post", class: "btn btn-primary" %>
 <% end %>
@@ -102,8 +114,6 @@
 </div>
   </div>
   </div>
-  </div>
-  <div class="col-8">
   </div>
  </body>
 </html>

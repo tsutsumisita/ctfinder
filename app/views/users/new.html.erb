@@ -7,7 +7,10 @@
         <div class=""><%= f.password_field(:password, placeholder:"Password", class:"form-control",:required => true) %></div>
         <div class=""><%= f.email_field(:email, placeholder:"E-mail", class:"form-control",:required => true) %></div>
         <div class=""><%= f.text_area(:self_introduction, placeholder:"自己紹介、アピールポイントなど", size: "24x6", class:"form-control",:required => true) %></div>
-
+        <div class="">
+                <%= f.label :image, "アカウント画像："%>
+                <%= f.file_field :image %>
+        </div>
         
         <div class="row form-check text-center">
         Pwn
