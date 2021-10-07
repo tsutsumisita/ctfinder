@@ -38,8 +38,7 @@
                             <% if params[:id].to_i == dm.sender_id %>
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <% user_img_path = "/user" + (params[:id].to_i % 10).to_s + ".png" %>
-                                        <p class="trim-image-to-circle"><%= image_tag user_img_path, class: "d-block mx-auto" %></p>
+                                        <p class="trim-image-to-circle"><%= image_tag @you.image, class: "d-block mx-auto" %></p>
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
