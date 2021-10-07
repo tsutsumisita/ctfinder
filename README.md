@@ -1,6 +1,6 @@
 # README
 <div align="center">
-  <img src="./public/Ctfinder.png">
+  <img src="./public/CtFinder.png">
 </div>
 This README would normally document whatever steps are necessary to get the
 application up and running.
